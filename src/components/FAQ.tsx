@@ -1,107 +1,152 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
 
 interface FAQItem {
   question: string;
   answer: string;
+  hasLink?: boolean;
 }
 
 const faqItems: FAQItem[] = [
   {
-    question: "Wie weit im Voraus sollte ich buchen?",
-    answer:
-      "Wir empfehlen, mindestens 4-6 Wochen vor dem Event anzufragen. Bei beliebten Terminen (z.B. Weihnachtsfeiern) solltest du noch früher planen – am besten 2-3 Monate im Voraus.",
+    question: "Sind Anfragen verbindlich?",
+    answer: "Nein, Anfragen sind komplett unverbindlich und werden innerhalb von 24 Stunden beantwortet. Gerne bieten wir dir auch ein kostenloses Erstgespräch an.",
   },
   {
-    question: "Welche Musikrichtungen bietet ihr an?",
-    answer:
-      "Von Jazz und Lounge über Pop und Rock bis hin zu elektronischer Musik – wir haben für jeden Geschmack und jedes Event das passende Angebot. Teile uns einfach deine Wünsche mit.",
+    question: "Wie läuft eine Anfrage bei euch ab?",
+    answer: `In nur drei Schritten:
+
+1) Klick auf „Unverbindliches Angebot anfragen"
+2) Fülle das Formular mit den wichtigsten Infos zu deinem Event aus
+3) Drücke auf Absenden.
+
+Innerhalb von 24 Stunden hast du dein individuelles Angebot im Postfach.`,
+    hasLink: true,
   },
   {
-    question: "Ist die Technik im Preis enthalten?",
-    answer:
-      "Bei unseren Rundum-sorglos-Paketen ist die komplette Technik (Ton, Licht, ggf. Bühne) bereits inklusive. Du musst dich um nichts kümmern.",
+    question: "Kann ich Songwünsche nennen?",
+    answer: "Auf jeden Fall! Unsere Bands haben zwar ein festes Repertoire, freuen sich aber über besondere Songwünsche. Erwähne sie einfach im Erstgespräch, so bleibt genug Zeit für die Vorbereitung.",
   },
   {
-    question: "Könnt ihr auch kurzfristig buchen?",
-    answer:
-      "Ja, wir versuchen auch kurzfristige Anfragen möglich zu machen. Kontaktiere uns einfach – wir finden eine Lösung.",
+    question: "Kann man euch deutschlandweit buchen?",
+    answer: "Absolut! Egal wo in Deutschland dein Event stattfindet, du kannst auf uns zählen. Um Anfahrt, Logistik und Unterkunft kümmern wir uns.",
   },
   {
-    question: "Wo seid ihr aktiv?",
-    answer:
-      "Wir sind deutschlandweit für euch da. Unser Netzwerk an Künstlern und Technikern ermöglicht professionelle Events in ganz Deutschland.",
+    question: "Was passiert, wenn die Sängerin/Sänger krank wird?",
+    answer: "Keine Sorge, dafür sind wir vorbereitet! Für alle unsere Künstler:innen haben wir erfahrene Ersatzleute parat, die kurzfristig einspringen können. Sollte es dazu kommen, melden wir uns natürlich sofort bei dir.",
   },
   {
-    question: "Was kostet eine Buchung?",
-    answer:
-      "Die Kosten variieren je nach Event-Größe, Dauer und gewünschten Leistungen. Nutze unseren Kalkulator für eine erste Einschätzung oder fordere ein unverbindliches Angebot an.",
+    question: "Muss ich mich noch um irgendetwas kümmern?",
+    answer: "Nein! Wir nehmen dir alles ab, was mit Musik zu tun hat: von der Auswahl der passenden Künstler:innen über Equipment und Technik bis hin zu Anfahrt und Übernachtung. Du kannst dich entspannt auf dein Event freuen.",
+  },
+  {
+    question: "Warum sollte ich nicht alles über eine Eventagentur buchen?",
+    answer: "Gute Frage! Bei den meisten Eventagenturen läuft Musik eher nebenbei. Ob die Band gut ist, wird dann zur Glückssache. Wir sehen das anders: Musik prägt die Stimmung und bleibt in Erinnerung. Deshalb geben wir ihr die Aufmerksamkeit, die sie verdient.",
   },
 ];
 
-export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+function FAQItemComponent({ item, isActive, onToggle }: { item: FAQItem; isActive: boolean; onToggle: () => void }) {
+  const answerRef = useRef<HTMLDivElement>(null);
+  const [maxHeight, setMaxHeight] = useState("0px");
 
-  const toggleItem = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+  useEffect(() => {
+    if (isActive && answerRef.current) {
+      setMaxHeight(`${answerRef.current.scrollHeight}px`);
+    } else {
+      setMaxHeight("0px");
+    }
+  }, [isActive]);
+
+  // Handle window resize to recalculate height
+  useEffect(() => {
+    const handleResize = () => {
+      if (isActive && answerRef.current) {
+        setMaxHeight(`${answerRef.current.scrollHeight}px`);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isActive]);
+
+  const openCalculator = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    window.dispatchEvent(new CustomEvent("openMFFCalculator"));
+  };
+
+  // Replace the link text with a clickable span
+  const renderAnswer = (text: string, hasLink?: boolean) => {
+    if (hasLink) {
+      const parts = text.split('„Unverbindliches Angebot anfragen"');
+      return (
+        <>
+          {parts[0]}
+          <span
+            onClick={openCalculator}
+            className="text-[#7dc9b1] cursor-pointer underline hover:text-[#5eb89d] transition-colors"
+          >
+            „Unverbindliches Angebot anfragen"
+          </span>
+          {parts[1]}
+        </>
+      );
+    }
+    return text;
   };
 
   return (
-    <div className="space-y-4">
-      {faqItems.map((item, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-30px" }}
-          transition={{ delay: index * 0.1, duration: 0.4 }}
-          className="border border-gray-200 rounded-xl overflow-hidden bg-white"
+    <div className="faq-item border-b border-[#e0e0e0]">
+      <button
+        onClick={onToggle}
+        className="faq-question w-full bg-transparent border-none outline-none text-left text-[1.25rem] font-semibold
+          text-black cursor-pointer flex justify-between items-center py-[30px] transition-opacity duration-300
+          hover:opacity-70"
+        style={{ fontFamily: "'Poppins', sans-serif" }}
+      >
+        <span className="pr-4">{item.question}</span>
+        <span
+          className="icon text-2xl font-light min-w-[30px] text-center ml-5 transition-transform duration-300"
+          style={{ transform: isActive ? 'rotate(45deg)' : 'rotate(0deg)' }}
         >
-          <button
-            onClick={() => toggleItem(index)}
-            className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-          >
-            <span className="font-medium text-gray-900 pr-4">
-              {item.question}
-            </span>
-            <motion.span
-              animate={{ rotate: openIndex === index ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
-              className="flex-shrink-0 text-[#0D7A5F]"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M6 9l6 6 6-6" />
-              </svg>
-            </motion.span>
-          </button>
-
-          <AnimatePresence>
-            {openIndex === index && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              >
-                <div className="px-6 pb-5 text-gray-600 font-light leading-relaxed">
-                  {item.answer}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      ))}
+          +
+        </span>
+      </button>
+      <div
+        ref={answerRef}
+        className="faq-answer overflow-hidden transition-[max-height] duration-400 ease-out"
+        style={{ maxHeight }}
+      >
+        <p className="pb-[30px] text-base leading-[1.6] font-light text-[#333] whitespace-pre-line">
+          {renderAnswer(item.answer, item.hasLink)}
+        </p>
+      </div>
     </div>
+  );
+}
+
+export default function FAQ() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const handleToggle = (index: number) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  return (
+    <section
+      className="faq-section max-w-[900px] mx-auto px-5"
+      style={{ fontFamily: "'Poppins', sans-serif" }}
+    >
+      <div className="faq-container border-t border-[#e0e0e0]">
+        {faqItems.map((item, index) => (
+          <FAQItemComponent
+            key={index}
+            item={item}
+            isActive={activeIndex === index}
+            onToggle={() => handleToggle(index)}
+          />
+        ))}
+      </div>
+    </section>
   );
 }

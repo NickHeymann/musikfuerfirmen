@@ -1,159 +1,140 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect } from "react";
 
-interface ServiceCard {
-  title: string;
-  description: string;
-  features: string[];
-  icon: React.ReactNode;
-}
-
-const services: ServiceCard[] = [
+const services = [
   {
+    number: "01",
     title: "Livebands",
-    description:
-      "Von Jazz bis Rock – professionelle Bands für jeden Anlass und jede Firmengröße.",
-    features: [
-      "Große Bandauswahl",
-      "Alle Musikrichtungen",
-      "Individuelle Setlists",
-      "Professionelles Equipment",
+    texts: [
+      "Unser absolutes Alleinstellungsmerkmal. Wir arbeiten mit einer festen Stammband, die wir persönlich kennen und die wir je nach Bedarf individuell für euch zusammenstellen und auf euer Event abstimmen.",
+      "Viele Agenturen vermitteln nur Kontakte, die Bands kennen sie kaum persönlich. Bei musikfürfirmen.de läuft das anders. Wir arbeiten mit einer eingespielten Stammband, die je nach Eventgröße flexibel in unterschiedlichen Besetzungen auftritt.",
+      "Alle Musiker:innen haben wir persönlich ausgewählt und zu einem harmonischen Team geformt. So garantieren wir absolute Spitzenqualität und eine sorgenfreie Zusammenarbeit.",
     ],
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        className="w-10 h-10"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z"
-        />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M9 18V5l12-2v13" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="18" cy="16" r="3" />
       </svg>
     ),
   },
   {
-    title: "DJs",
-    description:
-      "Erfahrene DJs, die genau wissen, wie man die Tanzfläche füllt und die Stimmung hält.",
-    features: [
-      "Professionelle DJs",
-      "Modernes Equipment",
-      "Flexible Musikauswahl",
-      "Licht & Sound inklusive",
+    number: "02",
+    title: "DJ's",
+    texts: [
+      "Unsere DJs liefern euch den perfekten Mix aus Klassikern und aktuellen Hits, maßgeschneidert für euer Event und perfekt abgestimmt auf eure individuellen Musikwünsche.",
+      "Ob entspannte Afterwork-Party oder festliches Firmenjubiläum: Wir finden über unser Netzwerk genau den richtigen DJ für euren Anlass. DJs lassen sich hervorragend mit einer Liveband kombinieren.",
+      "Auf Wunsch erweitern wir das Setup um live auftretende Sänger:innen oder Saxofonist:innen.",
     ],
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        className="w-10 h-10"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9 12a3 3 0 106 0 3 3 0 00-6 0z"
-        />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="3" />
       </svg>
     ),
   },
   {
+    number: "03",
     title: "Technik",
-    description:
-      "Komplette Veranstaltungstechnik: Licht, Ton und Bühne – alles aus einer Hand.",
-    features: [
-      "PA-Systeme",
-      "Professionelle Beleuchtung",
-      "Bühnenaufbau",
-      "Technische Betreuung",
+    texts: [
+      "Mit Musik- und Lichttechnik im Wert von über 100.000 € stellen wir für jede Eventgröße die perfekte Ausstattung damit unsere Künstler:innen ihre Performance optimal präsentieren können.",
+      "Unser umfangreiches Equipment ermöglicht es uns, für Events jeder Größenordnung die ideale Sound- und Lichtausstattung bereitzustellen.",
+      "Das Ergebnis: Ihr seid begeistert von der professionellen Darbietung, und unsere Musiker:innen können sich im besten Licht präsentieren.",
     ],
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        className="w-10 h-10"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-        />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+        <polyline points="2 17 12 22 22 17" />
+        <polyline points="2 12 12 17 22 12" />
       </svg>
     ),
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.15,
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  }),
-};
-
 export default function ServiceCards() {
+  useEffect(() => {
+    const section = document.getElementById("mff-sticky-section");
+    if (!section) return;
+
+    let el = section.parentElement;
+    let depth = 0;
+    const maxDepth = 20;
+
+    while (el && el !== document.documentElement && depth < maxDepth) {
+      el.style.overflow = "visible";
+      el = el.parentElement;
+      depth++;
+    }
+  }, []);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-      {services.map((service, index) => (
-        <motion.div
-          key={service.title}
-          custom={index}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={cardVariants}
-          whileHover={{ y: -8, transition: { duration: 0.3 } }}
-          className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100"
-        >
-          {/* Icon */}
-          <div className="mb-6 text-[#0D7A5F] group-hover:text-[#B2EAD8] transition-colors duration-300">
-            {service.icon}
+    <section
+      className="mff-sticky-cards relative w-full py-[60px] pb-[40px]"
+      id="mff-sticky-section"
+      style={
+        {
+          "--mff-accent": "#2DD4A8",
+          "--mff-accent-dark": "#22a883",
+          "--mff-accent-light": "#e6faf5",
+          "--mff-primary": "#1a1a2e",
+          "--mff-text": "#2d3748",
+          "--mff-text-light": "#4a5568",
+        } as React.CSSProperties
+      }
+    >
+      <div className="mff-cards-wrapper max-w-[1200px] mx-auto px-6 relative">
+        {services.map((service, index) => (
+          <div
+            key={service.number}
+            className={`mff-card mff-card-${index + 1} sticky w-full mb-[30px] rounded-[20px] shadow-[0_4px_6px_-1px_rgba(26,26,46,0.12),0_10px_40px_-10px_rgba(26,26,46,0.12)] overflow-hidden transition-shadow duration-300 border border-[rgba(45,212,168,0.1)] bg-white hover:shadow-[0_8px_16px_-2px_rgba(26,26,46,0.12),0_20px_60px_-15px_rgba(45,212,168,0.15)] hover:border-[rgba(45,212,168,0.25)]`}
+            style={{
+              top: `${80 + index * 30}px`,
+              zIndex: (index + 1) * 10,
+            }}
+          >
+            <div className="mff-card-inner flex flex-col md:flex-row items-stretch min-h-[450px] md:min-h-[450px]">
+              <div className="mff-card-content flex-1 p-7 md:p-12 flex flex-col justify-center order-2 md:order-1">
+                <div className="mff-card-icon w-12 h-12 mb-5 p-[10px] rounded-xl bg-[#e6faf5] shadow-[0_2px_8px_rgba(45,212,168,0.08)]">
+                  <div className="w-full h-full text-[#2DD4A8]">{service.icon}</div>
+                </div>
+
+                <span className="mff-card-number text-xs font-bold tracking-[2px] mb-2 text-[#2DD4A8] opacity-70">
+                  {service.number}
+                </span>
+
+                <h3 className="mff-card-title text-[22px] md:text-[32px] font-bold text-[#1a1a2e] m-0 mb-6 leading-[1.2]">
+                  {service.title}
+                </h3>
+
+                {service.texts.map((text, i) => (
+                  <p
+                    key={i}
+                    className="mff-card-text text-sm md:text-base leading-[1.7] text-[#4a5568] m-0 mb-4"
+                  >
+                    {text}
+                  </p>
+                ))}
+              </div>
+
+              <div className="mff-card-visual flex-none w-full h-[180px] md:h-auto md:w-[42%] relative order-1 md:order-2">
+                <div className="mff-card-image-placeholder absolute inset-0 flex items-center justify-center text-sm text-[#2DD4A8] opacity-40 bg-gradient-to-br from-[#e6faf5] to-[#d0f4eb]">
+                  Bild
+                </div>
+              </div>
+            </div>
           </div>
+        ))}
+      </div>
 
-          {/* Title */}
-          <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-            {service.title}
-          </h3>
-
-          {/* Description */}
-          <p className="text-gray-600 font-light mb-6 leading-relaxed">
-            {service.description}
-          </p>
-
-          {/* Features */}
-          <ul className="space-y-2">
-            {service.features.map((feature) => (
-              <li
-                key={feature}
-                className="flex items-center gap-2 text-sm text-gray-600 font-light"
-              >
-                <span className="text-[#0D7A5F] text-lg">✓</span>
-                {feature}
-              </li>
-            ))}
-          </ul>
-
-          {/* Hover accent line */}
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0D7A5F] to-[#B2EAD8] rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </motion.div>
-      ))}
-    </div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .mff-card {
+            position: relative !important;
+            top: auto !important;
+          }
+        }
+      `}</style>
+    </section>
   );
 }

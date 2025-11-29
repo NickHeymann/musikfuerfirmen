@@ -5,12 +5,8 @@ export default function Footer() {
     <footer className="bg-[#D4F4E8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Logo / Brand */}
           <div>
-            <Link
-              href="/"
-              className="text-xl font-semibold text-gray-900"
-            >
+            <Link href="/" className="text-xl font-semibold text-gray-900">
               musikfürfirmen.de
             </Link>
             <p className="mt-2 text-sm text-gray-600 font-light">
@@ -18,7 +14,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Kontakt */}
           <div>
             <h4 className="text-base font-semibold text-gray-900 mb-4">
               Kontakt
@@ -43,11 +38,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Info / Links */}
           <div>
-            <h4 className="text-base font-semibold text-gray-900 mb-4">
-              Info
-            </h4>
+            <h4 className="text-base font-semibold text-gray-900 mb-4">Info</h4>
             <div className="space-y-2 text-sm">
               <p>
                 <Link
@@ -77,7 +69,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="mt-12 pt-8 border-t border-gray-200/50">
           <p className="text-sm text-gray-500 text-center font-light">
             © {new Date().getFullYear()} musikfürfirmen.de. Alle Rechte

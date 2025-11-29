@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import ContactModal from "./ContactModal";
 
 interface ModalContextType {
@@ -27,6 +27,28 @@ export default function ModalProvider({ children }: ModalProviderProps) {
 
   const openContactModal = () => setIsContactModalOpen(true);
   const closeContactModal = () => setIsContactModalOpen(false);
+
+  // Listen for custom event from Hero component
+  useEffect(() => {
+    const handleOpenCalculator = () => {
+      openContactModal();
+    };
+
+    window.addEventListener("openMFFCalculator", handleOpenCalculator);
+    return () => window.removeEventListener("openMFFCalculator", handleOpenCalculator);
+  }, []);
+
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isContactModalOpen) {
+        closeContactModal();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isContactModalOpen]);
 
   return (
     <ModalContext.Provider value={{ openContactModal, closeContactModal }}>

@@ -81,9 +81,16 @@ export const metadata: Metadata = {
     canonical: "https://musikfuerfirmen.de",
   },
   category: "Entertainment",
+  icons: {
+    icon: [
+      { url: "/icon.webp", type: "image/webp" },
+    ],
+    apple: [
+      { url: "/icon.webp", type: "image/webp" },
+    ],
+  },
 };
 
-// JSON-LD Structured Data für SEO und AI-Suchmaschinen
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -172,34 +179,58 @@ const jsonLd = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "Wie weit im Voraus sollte ich buchen?",
+          name: "Sind Anfragen verbindlich?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Wir empfehlen, mindestens 4-6 Wochen vor dem Event anzufragen. Bei beliebten Terminen (z.B. Weihnachtsfeiern) solltest du noch früher planen – am besten 2-3 Monate im Voraus.",
+            text: "Nein, Anfragen sind komplett unverbindlich und werden innerhalb von 24 Stunden beantwortet. Gerne bieten wir dir auch ein kostenloses Erstgespräch an.",
           },
         },
         {
           "@type": "Question",
-          name: "Welche Musikrichtungen bietet ihr an?",
+          name: "Wie läuft eine Anfrage bei euch ab?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Von Jazz und Lounge über Pop und Rock bis hin zu elektronischer Musik – wir haben für jeden Geschmack und jedes Event das passende Angebot.",
+            text: "In nur drei Schritten: 1) Klick auf „Unverbindliches Angebot anfragen" 2) Fülle das Formular mit den wichtigsten Infos zu deinem Event aus 3) Drücke auf Absenden. Innerhalb von 24 Stunden hast du dein individuelles Angebot im Postfach.",
           },
         },
         {
           "@type": "Question",
-          name: "Ist die Technik im Preis enthalten?",
+          name: "Kann ich Songwünsche nennen?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Bei unseren Rundum-sorglos-Paketen ist die komplette Technik (Ton, Licht, ggf. Bühne) bereits inklusive. Du musst dich um nichts kümmern.",
+            text: "Auf jeden Fall! Unsere Bands haben zwar ein festes Repertoire, freuen sich aber über besondere Songwünsche. Erwähne sie einfach im Erstgespräch, so bleibt genug Zeit für die Vorbereitung.",
           },
         },
         {
           "@type": "Question",
-          name: "Wo seid ihr aktiv?",
+          name: "Kann man euch deutschlandweit buchen?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Wir sind deutschlandweit für euch da. Unser Netzwerk an Künstlern und Technikern ermöglicht professionelle Events in ganz Deutschland.",
+            text: "Absolut! Egal wo in Deutschland dein Event stattfindet, du kannst auf uns zählen. Um Anfahrt, Logistik und Unterkunft kümmern wir uns.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Was passiert, wenn die Sängerin/Sänger krank wird?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Keine Sorge, dafür sind wir vorbereitet! Für alle unsere Künstler:innen haben wir erfahrene Ersatzleute parat, die kurzfristig einspringen können. Sollte es dazu kommen, melden wir uns natürlich sofort bei dir.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Muss ich mich noch um irgendetwas kümmern?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Nein! Wir nehmen dir alles ab, was mit Musik zu tun hat: von der Auswahl der passenden Künstler:innen über Equipment und Technik bis hin zu Anfahrt und Übernachtung. Du kannst dich entspannt auf dein Event freuen.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Warum sollte ich nicht alles über eine Eventagentur buchen?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Gute Frage! Bei den meisten Eventagenturen läuft Musik eher nebenbei. Ob die Band gut ist, wird dann zur Glückssache. Wir sehen das anders: Musik prägt die Stimmung und bleibt in Erinnerung. Deshalb geben wir ihr die Aufmerksamkeit, die sie verdient.",
           },
         },
       ],

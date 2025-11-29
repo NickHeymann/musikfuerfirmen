@@ -3,74 +3,69 @@ import ServiceCards from "@/components/ServiceCards";
 import ProcessSteps from "@/components/ProcessSteps";
 import TeamSection from "@/components/TeamSection";
 import FAQ from "@/components/FAQ";
-import CTASection from "@/components/CTASection";
+import LogoAnimation from "@/components/LogoAnimation";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
     <>
       <Hero />
 
-      {/* Leistungen Section */}
-      <section id="leistungen" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-4">Was wir bieten</h2>
-          <p className="text-center text-gray-600 font-light mb-16 max-w-2xl mx-auto">
-            Ob intime Feier oder große Gala – wir haben die passende Lösung für
-            dein Firmenevent.
-          </p>
-          <ServiceCards />
-        </div>
+      <section id="waswirbieten" className="bg-white overflow-visible">
+        <ServiceCards />
       </section>
 
-      {/* Service Process Section */}
-      <section id="service" className="py-24 bg-gray-50">
+      <section id="service" className="py-0 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-4">Musik und Technik? Läuft.</h2>
-          <p className="text-center text-gray-600 font-light mb-16 max-w-2xl mx-auto">
-            Von uns geplant. Von euch gefeiert.
-          </p>
+          <div className="text-center mt-[43px] mb-[60px]">
+            <h2
+              className="text-[3rem] font-semibold text-[#1a1a1a] mb-[10px]"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              Musik und Technik? Läuft.
+            </h2>
+            <p
+              className="text-[1.5rem] font-normal text-[#1a1a1a] max-w-[600px] mx-auto mb-2"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              Von uns geplant. Von euch gefeiert.
+            </p>
+          </div>
           <ProcessSteps />
         </div>
       </section>
 
-      {/* Team Section */}
-      <section id="wir" className="py-24 bg-white">
+      <section id="wir" className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-4">Moin aus Hamburg!</h2>
-          <p className="text-center text-gray-600 font-light mb-16 max-w-2xl mx-auto">
-            Persönliche Betreuung von Anfrage bis Afterparty.
-          </p>
+          <div
+            className="text-center mt-[63px] px-5"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
+            <h2 className="text-[3rem] font-semibold text-[#1a1a1a] m-0">
+              Moin aus Hamburg!
+            </h2>
+          </div>
           <TeamSection />
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section id="faq" className="py-24 bg-gray-50">
+      <section id="faq" className="bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-4">Häufige Fragen</h2>
-          <p className="text-center text-gray-600 font-light mb-12">
-            Alles, was du wissen musst – kurz und knapp.
-          </p>
+          <h2
+            className="text-center text-[3rem] font-semibold mb-[120px] tracking-[-1px] text-black mt-[-12px]"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
+            FAQ
+          </h2>
           <FAQ />
         </div>
       </section>
 
-      {/* CTA Section */}
-      <CTASection />
-
-      {/* Logo Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-3xl font-semibold text-gray-900">
-            musikfürfirmen.de
-          </p>
-          <p className="mt-2 text-gray-600 font-light">
-            Dein{" "}
-            <span className="text-[#0D7A5F] font-medium">Partner</span> für
-            Firmenevents
-          </p>
-        </div>
+      <section className="py-[92px] pb-[77px] bg-white relative z-[1]">
+        <LogoAnimation />
       </section>
+
+      <Footer />
     </>
   );
 }

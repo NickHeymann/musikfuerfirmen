@@ -2,37 +2,29 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { useModal } from "./ModalProvider";
 
 const navItems = [
-  { href: "/#leistungen", label: "Unsere Leistungen" },
+  { href: "/#waswirbieten", label: "Unsere Leistungen" },
   { href: "/#wir", label: "Über Uns" },
   { href: "/#faq", label: "FAQ" },
 ];
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { openContactModal } = useModal();
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Header sichtbar/versteckt basierend auf Scroll-Richtung
       if (currentScrollY <= 10) {
         setIsVisible(true);
-        setIsScrolled(false);
       } else if (currentScrollY > lastScrollY + 5) {
-        // Scrolling down
         setIsVisible(false);
+        setIsMobileMenuOpen(false);
       } else if (currentScrollY < lastScrollY - 5) {
-        // Scrolling up
         setIsVisible(true);
-        setIsScrolled(true);
       }
 
       setLastScrollY(currentScrollY);
@@ -42,129 +34,110 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace("/#", "");
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.pushState(null, "", href);
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <>
-      <motion.header
-        initial={{ y: 0 }}
-        animate={{ y: isVisible ? 0 : -100 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-sm"
-            : "bg-white"
+      <header
+        id="header"
+        className={`fixed top-0 left-0 right-0 z-[9999] transition-transform duration-300 ease-in-out ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
+        style={{ backgroundColor: "#D4F4E8" }}
       >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="header-inner max-w-[1500px] mx-auto px-[4vw]">
           <div className="flex items-center justify-between h-[78px]">
-            {/* Logo */}
-            <Link
-              href="/"
-              className="text-lg font-semibold text-gray-900 hover:opacity-70 transition-opacity"
-            >
-              musikfürfirmen.de
-            </Link>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <button
-                onClick={openContactModal}
-                className="btn-primary text-sm py-2 px-5"
+            <div className="header-title">
+              <Link
+                href="/"
+                className="text-base font-semibold text-black hover:opacity-70 transition-opacity duration-200"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                Anfrage
-              </button>
+                musikfürfirmen.de
+              </Link>
             </div>
 
-            {/* Mobile Menu Button */}
+            <nav className="header-nav hidden md:flex items-center gap-8">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className="text-sm font-normal text-black hover:opacity-70 transition-opacity duration-200"
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-gray-700"
+              className="header-burger md:hidden p-2"
               aria-label={isMobileMenuOpen ? "Menü schließen" : "Menü öffnen"}
             >
-              <div className="w-6 h-5 relative flex flex-col justify-between">
+              <div className="burger-box w-6 flex flex-col gap-[6px]">
                 <span
-                  className={`w-full h-[1px] bg-current transform transition-all duration-300 ${
-                    isMobileMenuOpen ? "rotate-45 translate-y-2" : ""
+                  className={`w-full h-[1px] bg-black transform transition-all duration-300 origin-center ${
+                    isMobileMenuOpen ? "rotate-45 translate-y-[3.5px]" : ""
                   }`}
                 />
                 <span
-                  className={`w-full h-[1px] bg-current transition-opacity duration-300 ${
-                    isMobileMenuOpen ? "opacity-0" : ""
-                  }`}
-                />
-                <span
-                  className={`w-full h-[1px] bg-current transform transition-all duration-300 ${
-                    isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                  className={`w-full h-[1px] bg-black transform transition-all duration-300 origin-center ${
+                    isMobileMenuOpen ? "-rotate-45 -translate-y-[3.5px]" : ""
                   }`}
                 />
               </div>
             </button>
           </div>
+        </div>
+
+        <div className="h-[1px]" style={{ backgroundColor: "#D4F4E8" }} />
+      </header>
+
+      <div
+        className={`fixed inset-0 z-[9998] md:hidden transition-all duration-300 ${
+          isMobileMenuOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible pointer-events-none"
+        }`}
+      >
+        <div
+          className="absolute inset-0 bg-black/20"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+
+        <nav
+          className={`absolute top-[78px] left-0 right-0 bg-white shadow-lg transform transition-transform duration-300 ${
+            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+          style={{ backgroundColor: "#D4F4E8" }}
+        >
+          <div className="py-4 px-6">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className="block py-4 text-base font-normal text-black hover:opacity-70 transition-opacity"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
         </nav>
+      </div>
 
-        {/* Border */}
-        <div className="h-[1px] bg-gray-100" />
-      </motion.header>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 md:hidden"
-          >
-            {/* Backdrop */}
-            <div
-              className="absolute inset-0 bg-black/20 backdrop-blur-sm"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-
-            {/* Menu */}
-            <motion.nav
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="absolute top-[79px] right-0 w-full bg-white shadow-lg"
-            >
-              <div className="py-4 px-6 space-y-1">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block py-3 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg px-3 transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    openContactModal();
-                  }}
-                  className="w-full mt-4 btn-primary"
-                >
-                  Anfrage senden
-                </button>
-              </div>
-            </motion.nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Spacer für fixed Header */}
       <div className="h-[78px]" />
     </>
   );
