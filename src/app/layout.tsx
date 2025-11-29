@@ -190,7 +190,7 @@ const jsonLd = {
           name: "Wie läuft eine Anfrage bei euch ab?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "In nur drei Schritten: 1) Klick auf „Unverbindliches Angebot anfragen" 2) Fülle das Formular mit den wichtigsten Infos zu deinem Event aus 3) Drücke auf Absenden. Innerhalb von 24 Stunden hast du dein individuelles Angebot im Postfach.",
+            text: "In nur drei Schritten: 1) Klick auf 'Unverbindliches Angebot anfragen' 2) Fülle das Formular mit den wichtigsten Infos zu deinem Event aus 3) Drücke auf Absenden. Innerhalb von 24 Stunden hast du dein individuelles Angebot im Postfach.",
           },
         },
         {
