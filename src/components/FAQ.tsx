@@ -17,7 +17,7 @@ const faqItems: FAQItem[] = [
     question: "Wie läuft eine Anfrage bei euch ab?",
     answer: `In nur drei Schritten:
 
-1) Klick auf „Unverbindliches Angebot anfragen"
+1) Klick auf "Unverbindliches Angebot anfragen"
 2) Fülle das Formular mit den wichtigsten Infos zu deinem Event aus
 3) Drücke auf Absenden.
 
@@ -78,7 +78,7 @@ function FAQItemComponent({ item, isActive, onToggle }: { item: FAQItem; isActiv
   // Replace the link text with a clickable span
   const renderAnswer = (text: string, hasLink?: boolean) => {
     if (hasLink) {
-      const parts = text.split('„Unverbindliches Angebot anfragen"');
+      const parts = text.split('"Unverbindliches Angebot anfragen"');
       return (
         <>
           {parts[0]}
@@ -86,7 +86,7 @@ function FAQItemComponent({ item, isActive, onToggle }: { item: FAQItem; isActiv
             onClick={openCalculator}
             className="text-[#7dc9b1] cursor-pointer underline hover:text-[#5eb89d] transition-colors"
           >
-            „Unverbindliches Angebot anfragen"
+Unverbindliches Angebot anfragen
           </span>
           {parts[1]}
         </>
@@ -99,9 +99,7 @@ function FAQItemComponent({ item, isActive, onToggle }: { item: FAQItem; isActiv
     <div className="faq-item border-b border-[#e0e0e0]">
       <button
         onClick={onToggle}
-        className="faq-question w-full bg-transparent border-none outline-none text-left text-[1.25rem] font-semibold
-          text-black cursor-pointer flex justify-between items-center py-[30px] transition-opacity duration-300
-          hover:opacity-70"
+        className="faq-question w-full bg-transparent border-none outline-none text-left text-[1.25rem] font-semibold text-black cursor-pointer flex justify-between items-center py-[30px] transition-opacity duration-300 hover:opacity-70"
         style={{ fontFamily: "'Poppins', sans-serif" }}
       >
         <span className="pr-4">{item.question}</span>

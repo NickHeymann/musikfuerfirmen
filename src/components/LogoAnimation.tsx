@@ -18,17 +18,19 @@ export default function LogoAnimation() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
             setIsAnimated(false);
             if (logoRef.current) {
               void logoRef.current.offsetWidth;
             }
             setIsAnimated(true);
+          } else if (!entry.isIntersecting) {
+            setIsAnimated(false);
           }
         });
       },
       {
-        threshold: [0.9, 1.0],
+        threshold: [0, 0.5],
         rootMargin: '0px',
       }
     );
@@ -84,8 +86,7 @@ export default function LogoAnimation() {
         onMouseEnter={handleMouseEnter}
       >
         <div
-          className={`mff-logo-elegant-text text-[42px] font-semibold relative inline-block leading-none
-            ${isAnimated ? 'animate-metallic-swoosh' : ''}`}
+          className={`mff-logo-elegant-text text-[42px] font-semibold relative inline-block leading-none ${isAnimated ? 'animate-metallic-swoosh' : ''}`}
           style={{
             fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
             background: 'linear-gradient(90deg, #000 0%, #000 45%, #B2EAD8 49%, #D4F4E8 50%, #B2EAD8 51%, #000 55%, #000 100%)',
@@ -101,16 +102,14 @@ export default function LogoAnimation() {
         </div>
 
         <div
-          className={`mff-tagline-elegant text-lg font-light text-[#666] tracking-[0.5px] relative inline-block whitespace-nowrap leading-[1.4] cursor-default
-            ${isAnimated ? 'animate-tagline-appear' : 'opacity-0 -translate-y-[10px]'}`}
+          className={`mff-tagline-elegant text-lg font-light text-[#666] tracking-[0.5px] relative inline-block whitespace-nowrap leading-[1.4] cursor-default ${isAnimated ? 'animate-tagline-appear' : 'opacity-0 -translate-y-[10px]'}`}
           style={{
             fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
           }}
         >
-          Dein <span className="mff-partner text-[#0D7A5F] font-medium">Partner</span> für Firmenevents
+          Dein Partner für Firmenevents
           <span
-            className={`absolute bottom-[-4px] left-0 w-full h-[2px] bg-[#d4f4e8]
-              ${isAnimated ? 'animate-underline-appear' : 'opacity-0'}`}
+            className={`absolute bottom-[-4px] left-0 w-full h-[2px] bg-[#d4f4e8] ${isAnimated ? 'animate-underline-appear' : 'opacity-0'}`}
           />
         </div>
 

@@ -70,7 +70,7 @@ export default function ServiceCards() {
 
   return (
     <section
-      className="mff-sticky-cards relative w-full py-[60px] pb-[40px]"
+      className="mff-sticky-cards relative w-full pb-[40px]"
       id="mff-sticky-section"
       style={
         {
@@ -89,7 +89,7 @@ export default function ServiceCards() {
             key={service.number}
             className={`mff-card mff-card-${index + 1} sticky w-full mb-[30px] rounded-[20px] shadow-[0_4px_6px_-1px_rgba(26,26,46,0.12),0_10px_40px_-10px_rgba(26,26,46,0.12)] overflow-hidden transition-shadow duration-300 border border-[rgba(45,212,168,0.1)] bg-white hover:shadow-[0_8px_16px_-2px_rgba(26,26,46,0.12),0_20px_60px_-15px_rgba(45,212,168,0.15)] hover:border-[rgba(45,212,168,0.25)]`}
             style={{
-              top: `${80 + index * 30}px`,
+              top: '20px',
               zIndex: (index + 1) * 10,
             }}
           >

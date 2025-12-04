@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const navItems = [
-  { href: "/#waswirbieten", label: "Unsere Leistungen" },
-  { href: "/#wir", label: "Über Uns" },
-  { href: "/#faq", label: "FAQ" },
+  { href: "/#waswirbieten", label: "Unsere Leistungen", isAnchor: true },
+  { href: "/ueber-uns", label: "Über Uns", isAnchor: false },
+  { href: "/#faq", label: "FAQ", isAnchor: true },
 ];
 
 export default function Header() {
@@ -34,7 +34,12 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isAnchor: boolean) => {
+    if (!isAnchor) {
+      setIsMobileMenuOpen(false);
+      return; // Normale Navigation für externe Links
+    }
+
     e.preventDefault();
     const targetId = href.replace("/#", "");
     const target = document.getElementById(targetId);
@@ -52,7 +57,7 @@ export default function Header() {
         className={`fixed top-0 left-0 right-0 z-[9999] transition-transform duration-300 ease-in-out ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
-        style={{ backgroundColor: "#D4F4E8" }}
+        style={{ backgroundColor: "#ffffff" }}
       >
         <div className="header-inner max-w-[1500px] mx-auto px-[4vw]">
           <div className="flex items-center justify-between h-[78px]">
@@ -71,7 +76,7 @@ export default function Header() {
                 <a
                   key={item.href}
                   href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
+                  onClick={(e) => handleNavClick(e, item.href, item.isAnchor)}
                   className="text-sm font-normal text-black hover:opacity-70 transition-opacity duration-200"
                   style={{ fontFamily: "'Poppins', sans-serif" }}
                 >
@@ -101,7 +106,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="h-[1px]" style={{ backgroundColor: "#D4F4E8" }} />
+        <div className="h-[1px]" style={{ backgroundColor: "#e5e7eb" }} />
       </header>
 
       <div
@@ -120,14 +125,14 @@ export default function Header() {
           className={`absolute top-[78px] left-0 right-0 bg-white shadow-lg transform transition-transform duration-300 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
-          style={{ backgroundColor: "#D4F4E8" }}
+          style={{ backgroundColor: "#ffffff" }}
         >
           <div className="py-4 px-6">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
+                onClick={(e) => handleNavClick(e, item.href, item.isAnchor)}
                 className="block py-4 text-base font-normal text-black hover:opacity-70 transition-opacity"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >

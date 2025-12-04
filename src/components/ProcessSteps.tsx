@@ -195,9 +195,7 @@ export default function ProcessSteps() {
             </div>
 
             {index < 2 && (
-              <div className="service-connecting-line w-16 h-1 md:w-16 md:h-1 relative bg-[#e5e7eb] rounded-sm
-                my-4 md:my-0 md:mx-0
-                rotate-90 md:rotate-0">
+              <div className="service-connecting-line w-16 h-1 md:w-16 md:h-1 relative bg-[#e5e7eb] rounded-sm my-4 md:my-0 md:mx-0 rotate-90 md:rotate-0">
                 <div
                   className="absolute top-0 left-0 h-full bg-[#2DD4A8] rounded-sm"
                   style={{

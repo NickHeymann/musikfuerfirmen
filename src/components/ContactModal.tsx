@@ -220,40 +220,46 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setIsSubmitting(true);
     setErrorMessage("");
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          phone: formData.phone,
-          message: formData.message,
-          eventDate: formData.date,
-          eventTime: formData.time,
-          city: formData.city,
-          budget: formData.budget,
-          guests: formData.guests,
-          packageType: formData.package,
-        }),
-      });
+    // Package-Label für E-Mail
+    const packageLabels: Record<string, string> = {
+      dj: "Nur DJ",
+      band: "Full Band",
+      band_dj: "Full Band + DJ",
+    };
 
-      const data = await response.json();
+    // E-Mail-Body erstellen
+    const emailBody = `
+Neue Anfrage von der Website
 
-      if (!response.ok) {
-        throw new Error(data.error || "Fehler beim Senden");
-      }
+Name: ${formData.name}
+Firma: ${formData.company || "-"}
+E-Mail: ${formData.email}
+Telefon: ${formData.phone}
 
+Event-Details:
+- Datum: ${formData.date}
+- Uhrzeit: ${formData.time || "Nicht angegeben"}
+- Stadt: ${formData.city}
+- Gäste: ${formData.guests}
+- Budget: ${formData.budget || "Nicht angegeben"}
+- Paket: ${packageLabels[formData.package] || formData.package}
+
+Nachricht:
+${formData.message || "Keine Nachricht"}
+    `.trim();
+
+    // mailto-Link öffnen
+    const mailtoLink = `mailto:info@musikfuerfirmen.de?subject=${encodeURIComponent(
+      `Neue Anfrage: ${formData.city} am ${formData.date}`
+    )}&body=${encodeURIComponent(emailBody)}`;
+
+    window.location.href = mailtoLink;
+
+    // Kurze Verzögerung, dann Success zeigen
+    setTimeout(() => {
       setSubmitStatus("success");
-    } catch (error) {
-      setSubmitStatus("error");
-      setErrorMessage(
-        error instanceof Error ? error.message : "Ein Fehler ist aufgetreten"
-      );
-    } finally {
       setIsSubmitting(false);
-    }
+    }, 500);
   };
 
   const openCalcom = () => {

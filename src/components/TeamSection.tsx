@@ -1,7 +1,5 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-
 interface TeamMember {
   name: string;
   role: string;
@@ -36,126 +34,198 @@ const team: TeamMember[] = [
   },
 ];
 
-function PersonCard({ member, index }: { member: TeamMember; index: number }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [bioPosition, setBioPosition] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const bioRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isHovered && containerRef.current && bioRef.current) {
-      const bioRect = bioRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const topBuffer = 100;
-      const bottomBuffer = 100;
-
-      const visibleAreaTop = topBuffer;
-      const visibleAreaBottom = viewportHeight - bottomBuffer;
-      const visibleAreaCenter = (visibleAreaTop + visibleAreaBottom) / 2;
-
-      const bioHeight = bioRect.height;
-      const bioCenterCurrent = bioRect.top + (bioHeight / 2);
-
-      const offset = visibleAreaCenter - bioCenterCurrent;
-      setBioPosition(offset);
-    }
-  }, [isHovered]);
-
-  return (
-    <div className={`person flex items-start relative person-${member.position}`}>
-      <div className="person-content flex flex-col items-center w-[340px] relative">
-        <div
-          ref={containerRef}
-          className="container1 rounded-full h-[400px] w-[400px] mb-[-39px] cursor-pointer"
-          style={{
-            transform: isHovered ? 'scale(0.66)' : 'scale(0.60)',
-            transition: 'transform 250ms cubic-bezier(0.4, 0, 0.2, 1)',
-            WebkitTapHighlightColor: 'transparent',
-          }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <div
-            className="container-inner relative"
-            style={{
-              clipPath: 'path("M 390,400 C 390,504.9341 304.9341,590 200,590 95.065898,590 10,504.9341 10,400 V 10 H 200 390 Z")',
-              transformOrigin: '50%',
-              top: '-200px',
-            }}
-          >
-            <div
-              className="circle absolute rounded-full pointer-events-none"
-              style={{
-                backgroundColor: '#D4F4E8',
-                height: '380px',
-                width: '380px',
-                left: '10px',
-                top: '210px',
-              }}
-            />
-            <img
-              src={member.image}
-              alt={member.name}
-              className={`img pointer-events-none relative ${member.imageClass}`}
-              style={{
-                transform: isHovered ? 'translateY(0) scale(1.2)' : 'translateY(20px) scale(1.15)',
-                transformOrigin: '50% bottom',
-                transition: 'transform 300ms cubic-bezier(0.4, 0, 0.2, 1)',
-                ...(index === 0 ? { left: '22px', top: '174px', width: '340px' } : { left: '-6px', top: '160px', width: '444px' }),
-              }}
-            />
-          </div>
-        </div>
-
-        <div
-          ref={bioRef}
-          className={`bio-text absolute hidden xl:block w-[280px] bg-gradient-to-br from-white to-[#f8f8f8]
-            p-[25px] rounded-[15px] shadow-[0_10px_30px_rgba(0,0,0,0.1)] pointer-events-none z-10
-            ${member.position === 'left' ? 'right-full mr-[30px]' : 'left-full ml-[30px]'}`}
-          style={{
-            top: bioPosition,
-            opacity: isHovered ? 1 : 0,
-            transform: isHovered
-              ? 'translateX(0)'
-              : member.position === 'left' ? 'translateX(20px)' : 'translateX(-20px)',
-            transition: isHovered
-              ? 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1) 300ms, transform 400ms cubic-bezier(0.4, 0, 0.2, 1) 300ms'
-              : 'opacity 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-        >
-          <h3 className="text-lg font-semibold text-[#404245] m-0 mb-3">
-            {member.bioTitle}
-          </h3>
-          <p className="text-sm leading-[1.6] text-[#404245] m-0 whitespace-pre-line">
-            {member.bioText}
-          </p>
-        </div>
-
-        <div className="divider bg-[#BAD6EB] h-[1px] w-[160px] mb-4" />
-
-        <div className="name text-[#404245] text-4xl font-semibold mt-0 mb-[14px] text-center">
-          {member.name}
-        </div>
-
-        <div className="title text-[#333] text-base text-center font-light min-h-[40px] leading-[1.6]">
-          {member.role}
-          <br />
-          {member.roleSecondLine}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function TeamSection() {
   return (
-    <div
-      className="body1 flex flex-wrap justify-center items-start gap-5 py-10 px-5 bg-white"
-      style={{ fontFamily: "'Poppins', sans-serif" }}
-    >
-      {team.map((member, index) => (
-        <PersonCard key={member.name} member={member} index={index} />
-      ))}
-    </div>
+    <>
+      <div className="body1">
+        {team.map((member) => (
+          <div key={member.name} className={`person person-${member.position}`}>
+            <div className="person-content">
+              <div className="container1">
+                <div className="container-inner">
+                  <div className="circle"></div>
+                  <img
+                    className={`img ${member.imageClass}`}
+                    src={member.image}
+                    alt={member.name}
+                  />
+                </div>
+              </div>
+              <div className="bio-text">
+                <h3>{member.bioTitle}</h3>
+                <p>{member.bioText}</p>
+              </div>
+              <div className="divider"></div>
+              <div className="name">{member.name}</div>
+              <div className="title">
+                {member.role}
+                <br />
+                {member.roleSecondLine}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <style jsx>{`
+        .body1 {
+          align-items: flex-start;
+          background-color: #ffffff;
+          display: flex;
+          font-family: "Poppins", sans-serif;
+          flex-wrap: wrap;
+          justify-content: center;
+          height: auto;
+          gap: 20px;
+          padding: 40px 20px;
+        }
+        .person {
+          align-items: flex-start;
+          display: flex;
+          flex-direction: row;
+          position: relative;
+        }
+        .person-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 340px;
+          position: relative;
+        }
+        .container1 {
+          border-radius: 50%;
+          height: 400px;
+          -webkit-tap-highlight-color: transparent;
+          transform: scale(0.60);
+          transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+          width: 400px;
+          margin-bottom: -39px;
+          cursor: pointer;
+        }
+        .container1:hover {
+          transform: scale(0.66);
+        }
+        .container-inner {
+          clip-path: path(
+            "M 390,400 C 390,504.9341 304.9341,590 200,590 95.065898,590 10,504.9341 10,400 V 10 H 200 390 Z"
+          );
+          position: relative;
+          transform-origin: 50%;
+          top: -200px;
+        }
+        .circle {
+          background-color: #D4F4E8;
+          border-radius: 50%;
+          height: 380px;
+          left: 10px;
+          pointer-events: none;
+          position: absolute;
+          top: 210px;
+          width: 380px;
+        }
+        .img {
+          pointer-events: none;
+          position: relative;
+          transform: translateY(20px) scale(1.15);
+          transform-origin: 50% bottom;
+          transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .container1:hover .img {
+          transform: translateY(0) scale(1.2);
+        }
+        .img1 {
+          left: 22px;
+          top: 174px;
+          width: 340px;
+        }
+        .img2 {
+          left: -6px;
+          top: 160px;
+          width: 444px;
+        }
+        .divider {
+          background-color: #BAD6EB;
+          height: 1px;
+          width: 160px;
+          margin-bottom: 16px;
+        }
+        .name {
+          color: #404245;
+          font-size: 36px;
+          font-weight: 600;
+          margin-top: 0;
+          margin-bottom: 14px;
+          text-align: center;
+        }
+        .title {
+          color: #333;
+          font-family: "Poppins", sans-serif;
+          font-size: 1rem;
+          text-align: center;
+          font-weight: 300;
+          margin-top: 0;
+          min-height: 40px;
+          line-height: 1.6;
+        }
+        .bio-text {
+          position: absolute;
+          top: 0;
+          width: 280px;
+          background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+          padding: 25px;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          opacity: 0;
+          transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+          pointer-events: none;
+          z-index: 10;
+          white-space: pre-line;
+        }
+        .bio-text h3 {
+          font-size: 18px;
+          font-weight: 600;
+          color: #404245;
+          margin: 0 0 12px 0;
+        }
+        .bio-text p {
+          font-size: 14px;
+          line-height: 1.6;
+          color: #404245;
+          margin: 0;
+        }
+        .person-left .bio-text {
+          right: 100%;
+          margin-right: 30px;
+          transform: translateX(20px);
+        }
+        .person-right .bio-text {
+          left: 100%;
+          margin-left: 30px;
+          transform: translateX(-20px);
+        }
+        .container1:hover ~ .bio-text {
+          opacity: 1;
+          transform: translateX(0);
+          transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1) 300ms, transform 400ms cubic-bezier(0.4, 0, 0.2, 1) 300ms;
+        }
+        @media (max-width: 1200px) {
+          .bio-text {
+            display: none;
+          }
+        }
+        @media (max-width: 767px) {
+          .body1 {
+            align-items: center;
+            background-color: #f2f2f2;
+            display: flex;
+            font-family: "Poppins", sans-serif;
+            flex-wrap: wrap;
+            justify-content: center;
+            height: 100%;
+            gap: 0px;
+          }
+        }
+      `}</style>
+    </>
   );
 }

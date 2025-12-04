@@ -1,25 +1,35 @@
+"use client";
+
 import Hero from "@/components/Hero";
 import ServiceCards from "@/components/ServiceCards";
 import ProcessSteps from "@/components/ProcessSteps";
 import TeamSection from "@/components/TeamSection";
 import FAQ from "@/components/FAQ";
 import LogoAnimation from "@/components/LogoAnimation";
-import Footer from "@/components/Footer";
+import HamburgAnimation from "@/components/HamburgAnimation";
 
 export default function Home() {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <Hero />
 
-      <section id="waswirbieten" className="bg-white overflow-visible">
+      <section id="waswirbieten" className="bg-white overflow-visible pt-[187px] scroll-mt-[0px]">
         <ServiceCards />
       </section>
 
-      <section id="service" className="py-0 bg-white">
+      <section id="service" className="pt-[108px] bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mt-[43px] mb-[60px]">
+          <div className="text-center mb-[60px]">
             <h2
-              className="text-[3rem] font-semibold text-[#1a1a1a] mb-[10px]"
+              onClick={() => scrollToSection("service")}
+              className="text-[3rem] font-semibold text-[#1a1a1a] mb-[10px] cursor-pointer hover:opacity-70 transition-opacity"
               style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               Musik und Technik? Läuft.
@@ -35,24 +45,28 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="wir" className="bg-white">
+      <section id="wir" className="pt-[178px] bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
-            className="text-center mt-[63px] px-5"
+            className="text-center px-5 overflow-visible"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
-            <h2 className="text-[3rem] font-semibold text-[#1a1a1a] m-0">
-              Moin aus Hamburg!
-            </h2>
+            <div
+              onClick={() => scrollToSection("wir")}
+              className="cursor-pointer hover:opacity-70 transition-opacity inline-block"
+            >
+              <HamburgAnimation />
+            </div>
           </div>
           <TeamSection />
         </div>
       </section>
 
-      <section id="faq" className="bg-white">
+      <section id="faq" className="pt-[134px] bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
-            className="text-center text-[3rem] font-semibold mb-[120px] tracking-[-1px] text-black mt-[-12px]"
+            onClick={() => scrollToSection("faq")}
+            className="text-center text-[3rem] font-semibold mb-[120px] tracking-[-1px] text-black cursor-pointer hover:opacity-70 transition-opacity"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             FAQ
@@ -61,11 +75,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-[92px] pb-[77px] bg-white relative z-[1]">
+      <section className="pt-[190px] pb-[193px] bg-white relative z-[1]">
         <LogoAnimation />
       </section>
-
-      <Footer />
     </>
   );
 }

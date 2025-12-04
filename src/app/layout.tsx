@@ -81,14 +81,6 @@ export const metadata: Metadata = {
     canonical: "https://musikfuerfirmen.de",
   },
   category: "Entertainment",
-  icons: {
-    icon: [
-      { url: "/icon.webp", type: "image/webp" },
-    ],
-    apple: [
-      { url: "/icon.webp", type: "image/webp" },
-    ],
-  },
 };
 
 const jsonLd = {
@@ -246,6 +238,7 @@ export default function RootLayout({
   return (
     <html lang="de" className={poppins.variable}>
       <head>
+        <link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
