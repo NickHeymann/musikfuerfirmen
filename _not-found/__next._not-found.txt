@@ -1,4 +1,4 @@
 1:"$Sreact.fragment"
 2:I[39756,["/musikfuerfirmen/_next/static/chunks/6244d0890dd7f132.js","/musikfuerfirmen/_next/static/chunks/247eb132b7f7b574.js"],"default"]
 3:I[37457,["/musikfuerfirmen/_next/static/chunks/6244d0890dd7f132.js","/musikfuerfirmen/_next/static/chunks/247eb132b7f7b574.js"],"default"]
-0:{"buildId":"kP5Na4GfMNDoIPimrRoVJ","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"F0y2ZBK0uKW-f_Ab6kU3e","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
