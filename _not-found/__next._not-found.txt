@@ -1,4 +1,4 @@
 1:"$Sreact.fragment"
-2:I[39756,["/musikfuerfirmen/_next/static/chunks/6244d0890dd7f132.js","/musikfuerfirmen/_next/static/chunks/247eb132b7f7b574.js"],"default"]
-3:I[37457,["/musikfuerfirmen/_next/static/chunks/6244d0890dd7f132.js","/musikfuerfirmen/_next/static/chunks/247eb132b7f7b574.js"],"default"]
-0:{"buildId":"xEryd28Pz9-IPI6nn3ezA","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
+2:I[39756,["/musikfuerfirmen/_next/static/chunks/125764967a43877d.js","/musikfuerfirmen/_next/static/chunks/247eb132b7f7b574.js"],"default"]
+3:I[37457,["/musikfuerfirmen/_next/static/chunks/125764967a43877d.js","/musikfuerfirmen/_next/static/chunks/247eb132b7f7b574.js"],"default"]
+0:{"buildId":"BI4ilFlcJDdkVI_w0DXHz","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
