@@ -8,6 +8,7 @@
 
 import { useState } from "react";
 import EmailCaptureModal from "./EmailCaptureModal";
+import { EmailIcon } from "./icons";
 
 interface CalculatorState {
   guestCount: number;
@@ -293,10 +294,13 @@ export default function BudgetCalculator() {
           </div>
 
           <div className="bg-white/10 rounded-xl p-4 mb-6">
-            <p className="text-sm">
-              💌 Wir haben euch ein detailliertes PDF per Email geschickt!
-              <br />
-              Dort findet ihr: Breakdown, Vergleich & nächste Schritte.
+            <p className="text-sm flex items-start gap-2">
+              <EmailIcon className="w-4 h-4 flex-shrink-0 mt-0.5" />
+              <span>
+                Wir haben euch ein detailliertes PDF per Email geschickt!
+                <br />
+                Dort findet ihr: Breakdown, Vergleich & nächste Schritte.
+              </span>
             </p>
           </div>
 

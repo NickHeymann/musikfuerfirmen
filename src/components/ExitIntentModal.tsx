@@ -8,7 +8,7 @@
  */
 
 import { useState, useEffect } from "react";
-import { CloseIcon } from "./icons";
+import { CloseIcon, ClipboardIcon, CheckIcon } from "./icons";
 
 export default function ExitIntentModal() {
   const [isVisible, setIsVisible] = useState(false);
@@ -74,7 +74,9 @@ export default function ExitIntentModal() {
 
         {!submitted ? (
           <>
-            <div className="modal-icon">📋</div>
+            <div className="modal-icon">
+              <ClipboardIcon className="w-16 h-16 text-[#0D7A5F] mx-auto" />
+            </div>
 
             <h2 className="modal-title">Wartet! Nehmt euren kostenlosen Event-Planer mit</h2>
 
@@ -105,11 +107,13 @@ export default function ExitIntentModal() {
           </>
         ) : (
           <div className="success-message">
-            <div className="success-icon">✓</div>
+            <div className="success-icon">
+              <CheckIcon className="w-12 h-12" />
+            </div>
             <h3 className="success-title">Perfekt! Check eure E-Mails</h3>
             <p className="success-text">
               Wir haben euch den Event-Planner gerade zugeschickt.
-              Viel Erfolg bei eurem nächsten Event! 🎉
+              Viel Erfolg bei eurem nächsten Event!
             </p>
           </div>
         )}
@@ -181,7 +185,6 @@ export default function ExitIntentModal() {
         }
 
         .modal-icon {
-          font-size: 64px;
           text-align: center;
           margin-bottom: 24px;
         }
@@ -275,8 +278,6 @@ export default function ExitIntentModal() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 48px;
-          font-weight: 700;
           margin: 0 auto 24px;
           animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }

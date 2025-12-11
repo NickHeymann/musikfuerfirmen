@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BudgetRechtfertigungDownload from "@/components/BudgetRechtfertigungDownload";
+import { MoneyIcon, MusicNotesIcon, BarChartIcon, EmailIcon, BrainIcon, TargetIcon, ScaleIcon, FireIcon, ChartIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Budget-Rechtfertigung: Liveband für Chef-Pitch | musikfürfirmen.de",
@@ -24,8 +25,9 @@ export default function BudgetRechtfertigungPage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#0D7A5F] to-[#0a5f4a] text-white pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-white/20 rounded-full text-sm font-semibold mb-6">
-            💰 85% Erfolgsquote
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-sm font-semibold mb-6">
+            <MoneyIcon className="w-4 h-4" />
+            85% Erfolgsquote
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight font-['Poppins']">
@@ -139,7 +141,7 @@ export default function BudgetRechtfertigungPage() {
 
             <div className="space-y-4">
               <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
-                <div className="text-2xl">💰</div>
+                <MoneyIcon className="w-8 h-8 text-[#0D7A5F] flex-shrink-0" />
                 <div>
                   <div className="font-semibold text-lg">
                     Mitarbeiter-Bindung
@@ -152,7 +154,7 @@ export default function BudgetRechtfertigungPage() {
               </div>
 
               <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
-                <div className="text-2xl">📱</div>
+                <ChartIcon className="w-8 h-8 text-[#0D7A5F] flex-shrink-0" />
                 <div>
                   <div className="font-semibold text-lg">
                     Employer-Branding
@@ -164,7 +166,7 @@ export default function BudgetRechtfertigungPage() {
               </div>
 
               <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
-                <div className="text-2xl">📈</div>
+                <ChartIcon className="w-8 h-8 text-[#0D7A5F] flex-shrink-0" />
                 <div>
                   <div className="font-semibold text-lg">
                     Produktivitätssteigerung
@@ -201,42 +203,42 @@ export default function BudgetRechtfertigungPage() {
           <div className="grid md:grid-cols-2 gap-6">
             {[
               {
-                icon: "💰",
+                Icon: MoneyIcon,
                 title: "ROI-Kalkulation (Hard Facts)",
                 desc: "5.000€ Investment → 17.000-25.000€ Return. Mit Quellen (LinkedIn, Harvard Business Review, Gallup)",
               },
               {
-                icon: "🎵",
+                Icon: MusicNotesIcon,
                 title: "Liveband vs. DJ Vergleich",
                 desc: "Faktentabelle mit echten Zahlen: Stimmung (+50%), Social Media (+800%), Tanzfläche (+110%)",
               },
               {
-                icon: "📊",
+                Icon: BarChartIcon,
                 title: "HR-Manager Umfrage",
                 desc: "250 HR-Manager: 82% sagen 'Entertainment wichtiger als Location'. Nur 8% würden hier Budget kürzen",
               },
               {
-                icon: "📧",
+                Icon: EmailIcon,
                 title: "Copy-Paste Email-Template",
                 desc: "Fertiger Chef-Pitch für Copy-Paste. Einfach Firma + Zahlen anpassen, fertig!",
               },
               {
-                icon: "🧠",
+                Icon: BrainIcon,
                 title: "Psychologie-Tricks",
                 desc: "Warum Livebands funktionieren: Social Proof, Authentizität, Flexibilität",
               },
               {
-                icon: "🎯",
+                Icon: TargetIcon,
                 title: "Chef-Typ-spezifische Argumente",
                 desc: "CFO? CEO? COO? Skeptiker? Für jeden Chef-Typ die richtigen Argumente",
               },
               {
-                icon: "⚖️",
+                Icon: ScaleIcon,
                 title: "Was-wäre-wenn-Szenarien",
                 desc: "Szenario A (DJ): 8.500€ Net-Loss. Szenario B (Band): 6.000-12.000€ Net-Gain",
               },
               {
-                icon: "🔥",
+                Icon: FireIcon,
                 title: "Killer-Argument",
                 desc: "2 Kündigungen = 28.000€ Kosten. Riskieren wir das, um 3.500€ zu sparen?",
               },
@@ -245,7 +247,7 @@ export default function BudgetRechtfertigungPage() {
                 key={i}
                 className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-all duration-300"
               >
-                <div className="text-4xl mb-4">{item.icon}</div>
+                <item.Icon className="w-12 h-12 text-[#0D7A5F] mb-4" />
                 <h3 className="text-xl font-bold mb-2 font-['Poppins']">
                   {item.title}
                 </h3>

@@ -3,30 +3,46 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { getAssetPath } from "@/lib/config";
+import {
+  GuitarIcon,
+  MicrophoneIcon,
+  WrenchIcon,
+  TruckIcon,
+  MusicNotesIcon,
+  RocketIcon,
+  PianoIcon,
+  CameraIcon,
+  GraduationCapIcon,
+  BriefcaseIcon,
+  ChartIcon,
+  MixerIcon,
+  SpeakerIcon,
+  ClipboardIcon,
+} from "@/components/icons";
 
 interface TimelineEvent {
   year: string;
   title: string;
   description: string;
-  emoji?: string;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 const jonasTimeline: TimelineEvent[] = [
-  { year: "2002", title: "Erste Gitarre", description: "Mit 7 Jahren beginnt die musikalische Reise", emoji: "🎸" },
-  { year: "2008", title: "Erste Bandgründung", description: "Schulband und erste Auftritte in Hamburg", emoji: "🎤" },
-  { year: "2014", title: "Professionelle Bühnentechnik", description: "Ausbildung zum Veranstaltungstechniker", emoji: "🔧" },
-  { year: "2016", title: "Tour-Techniker", description: "Auf Tour mit Revolverheld und Adel Tawil", emoji: "🚐" },
-  { year: "2019", title: "Coverband-Karriere", description: "Hunderte Events mit verschiedenen Formationen", emoji: "🎵" },
-  { year: "2024", title: "musikfürfirmen.de", description: "Gründung - Musik und Technik aus einer Hand", emoji: "🚀" },
+  { year: "2002", title: "Erste Gitarre", description: "Mit 7 Jahren beginnt die musikalische Reise", icon: GuitarIcon },
+  { year: "2008", title: "Erste Bandgründung", description: "Schulband und erste Auftritte in Hamburg", icon: MicrophoneIcon },
+  { year: "2014", title: "Professionelle Bühnentechnik", description: "Ausbildung zum Veranstaltungstechniker", icon: WrenchIcon },
+  { year: "2016", title: "Tour-Techniker", description: "Auf Tour mit Revolverheld und Adel Tawil", icon: TruckIcon },
+  { year: "2019", title: "Coverband-Karriere", description: "Hunderte Events mit verschiedenen Formationen", icon: MusicNotesIcon },
+  { year: "2024", title: "musikfürfirmen.de", description: "Gründung - Musik und Technik aus einer Hand", icon: RocketIcon },
 ];
 
 const nickTimeline: TimelineEvent[] = [
-  { year: "1998", title: "Musik im Blut", description: "Aufgewachsen mit Instrumenten und Melodien", emoji: "🎹" },
-  { year: "2010", title: "Erste Kamera", description: "Entdeckung der Videografie und Storytelling", emoji: "📹" },
-  { year: "2016", title: "Musikstudium", description: "Professionelle Ausbildung in Musik und Medien", emoji: "🎓" },
-  { year: "2019", title: "Selbständigkeit", description: "Gründung als Videograf und Marketingberater", emoji: "💼" },
-  { year: "2022", title: "100M+ Views", description: "Virale Event-Videos auf Social Media", emoji: "📈" },
-  { year: "2024", title: "musikfürfirmen.de", description: "Marketing und visuelle Identität", emoji: "🚀" },
+  { year: "1998", title: "Musik im Blut", description: "Aufgewachsen mit Instrumenten und Melodien", icon: PianoIcon },
+  { year: "2010", title: "Erste Kamera", description: "Entdeckung der Videografie und Storytelling", icon: CameraIcon },
+  { year: "2016", title: "Musikstudium", description: "Professionelle Ausbildung in Musik und Medien", icon: GraduationCapIcon },
+  { year: "2019", title: "Selbständigkeit", description: "Gründung als Videograf und Marketingberater", icon: BriefcaseIcon },
+  { year: "2022", title: "100M+ Views", description: "Virale Event-Videos auf Social Media", icon: ChartIcon },
+  { year: "2024", title: "musikfürfirmen.de", description: "Marketing und visuelle Identität", icon: RocketIcon },
 ];
 
 const caseStudies = [
@@ -84,13 +100,13 @@ function Timeline({ events, color }: { events: TimelineEvent[]; color: string })
             index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
           }`}
         >
-          {/* Punkt auf der Linie mit Emoji */}
+          {/* Punkt auf der Linie mit Icon */}
           <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 z-10">
             <div
-              className="w-12 h-12 rounded-full border-4 flex items-center justify-center text-2xl"
+              className="w-12 h-12 rounded-full border-4 flex items-center justify-center text-white"
               style={{ backgroundColor: color, borderColor: color }}
             >
-              {event.emoji}
+              <event.icon className="w-6 h-6" />
             </div>
           </div>
 
@@ -238,7 +254,7 @@ export default function UeberUnsPage() {
           <div className="aspect-video bg-gradient-to-br from-[#D4F4E8] to-[#0D7A5F] rounded-2xl flex items-center justify-center relative overflow-hidden shadow-xl">
             {/* Placeholder for Video - Replace with actual YouTube/Vimeo embed */}
             <div className="text-center text-white">
-              <div className="text-6xl mb-4">📹</div>
+              <CameraIcon className="w-16 h-16 mx-auto mb-4" />
               <p className="text-xl font-semibold mb-2">Video-Reel kommt hier</p>
               <p className="text-sm opacity-80">YouTube/Vimeo Embed</p>
             </div>
@@ -301,7 +317,7 @@ export default function UeberUnsPage() {
                 <div className="w-full md:w-1/2">
                   <div className="aspect-[4/3] bg-gradient-to-br from-[#D4F4E8] to-[#0D7A5F] rounded-2xl flex items-center justify-center shadow-lg">
                     <div className="text-white text-center">
-                      <div className="text-5xl mb-2">🎉</div>
+                      <MusicNotesIcon className="w-16 h-16 mx-auto mb-2" />
                       <p className="text-sm opacity-80">{study.company}</p>
                     </div>
                   </div>
@@ -491,12 +507,12 @@ export default function UeberUnsPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { title: "Soundcheck", desc: "3h vor Event-Start prüfen wir jedes Detail", emoji: "🎚️" },
-              { title: "Technik-Setup", desc: "PA, Licht, Backline – alles perfekt aufeinander abgestimmt", emoji: "🔊" },
-              { title: "Final Briefing", desc: "Letzte Absprachen mit Band und Veranstalter", emoji: "📋" }
+              { title: "Soundcheck", desc: "3h vor Event-Start prüfen wir jedes Detail", Icon: MixerIcon },
+              { title: "Technik-Setup", desc: "PA, Licht, Backline – alles perfekt aufeinander abgestimmt", Icon: SpeakerIcon },
+              { title: "Final Briefing", desc: "Letzte Absprachen mit Band und Veranstalter", Icon: ClipboardIcon }
             ].map((item) => (
               <div key={item.title} className="bg-[#f9faf9] rounded-xl p-6 text-center border border-gray-100">
-                <div className="text-5xl mb-4">{item.emoji}</div>
+                <item.Icon className="w-12 h-12 mx-auto mb-4 text-[#0D7A5F]" />
                 <h3 className="text-lg font-semibold text-[#1a1a1a] mb-2">{item.title}</h3>
                 <p className="text-sm text-[#666] leading-relaxed">{item.desc}</p>
               </div>

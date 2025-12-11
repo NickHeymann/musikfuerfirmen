@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import EventPlannerDownload from "@/components/EventPlannerDownload";
+import { BarChartIcon, CalendarIcon, MoneyIcon, MusicNotesIcon, WarningIcon, ClipboardIcon, FireIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Event-Planner 2026 (kostenlos) | musikfürfirmen.de",
@@ -24,8 +25,9 @@ export default function EventPlanner2026Page() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[#0D7A5F] to-[#0a5f4a] text-white pt-32 pb-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-white/20 rounded-full text-sm font-semibold mb-6">
-            🔥 Über 2.500 Downloads
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 rounded-full text-sm font-semibold mb-6">
+            <FireIcon className="w-4 h-4" />
+            Über 2.500 Downloads
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight font-['Poppins']">
@@ -78,32 +80,32 @@ export default function EventPlanner2026Page() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                icon: "📊",
+                Icon: BarChartIcon,
                 title: "Top 10 Pain Points",
                 desc: "Die größten Probleme bei Event-Planung – mit echten Lösungen aus 500+ Events",
               },
               {
-                icon: "📅",
+                Icon: CalendarIcon,
                 title: "12-Monats-Timeline",
                 desc: "Wann genau buchen? Perfekter Zeitplan für Dezember 2026 Events",
               },
               {
-                icon: "💰",
+                Icon: MoneyIcon,
                 title: "Budget-Breakdown",
                 desc: "Was kostet was? Detaillierte Aufschlüsselung für 100-200 Gäste",
               },
               {
-                icon: "🎵",
+                Icon: MusicNotesIcon,
                 title: "70-20-10 Musik-Formel",
                 desc: "Wie ihr ALLE Altersgruppen begeistert (vom Azubi bis zum Chef)",
               },
               {
-                icon: "⚠️",
+                Icon: WarningIcon,
                 title: "7 teuerste Fehler",
                 desc: "Diese Mistakes kosten 2.000-5.000€ – und wie ihr sie vermeidet",
               },
               {
-                icon: "📋",
+                Icon: ClipboardIcon,
                 title: "Copy-Paste-Vorlagen",
                 desc: "Band-Briefing, Chef-Pitch, Technischer Rider – einfach übernehmen!",
               },
@@ -112,7 +114,7 @@ export default function EventPlanner2026Page() {
                 key={i}
                 className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-all duration-300"
               >
-                <div className="text-4xl mb-4">{item.icon}</div>
+                <item.Icon className="w-12 h-12 text-[#0D7A5F] mb-4" />
                 <h3 className="text-xl font-bold mb-2 font-['Poppins']">
                   {item.title}
                 </h3>

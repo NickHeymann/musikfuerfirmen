@@ -6,6 +6,8 @@
  * High-converting CTA section with value propositions
  */
 
+import { CheckIcon } from "./icons";
+
 export default function LeadMagnetsBanner() {
   return (
     <section className="py-16 bg-gradient-to-br from-[#f0faf7] to-white">
@@ -48,9 +50,9 @@ export default function LeadMagnetsBanner() {
                   Event-Planner 2026
                 </h3>
                 <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
-                  <span>📄 6.500 Wörter</span>
+                  <span>6.500 Wörter</span>
                   <span>•</span>
-                  <span>⏱️ 15 Min.</span>
+                  <span>15 Min.</span>
                   <span>•</span>
                   <span className="text-[#0D7A5F] font-semibold">
                     Kostenlos
@@ -123,9 +125,12 @@ export default function LeadMagnetsBanner() {
                   Budget-Rechtfertigung
                 </h3>
                 <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
-                  <span>📄 3.800 Wörter</span>
+                  <span>3.800 Wörter</span>
                   <span>•</span>
-                  <span>✅ 85% Erfolgsquote</span>
+                  <span className="inline-flex items-center gap-1">
+                    <CheckIcon className="w-3 h-3 text-[#0D7A5F]" />
+                    85% Erfolgsquote
+                  </span>
                   <span>•</span>
                   <span className="text-[#0D7A5F] font-semibold">
                     Kostenlos
