@@ -23,23 +23,18 @@ src/
 └── types/         # TypeScript interfaces
 ```
 
-## Deployment-Standards
+## Infrastruktur & Integration
 
-### Hosting (Vercel oder Hetzner)
-- **Option A**: Vercel für Next.js (einfach)
-- **Option B**: Docker auf Hetzner (mehr Kontrolle)
-
-### CI/CD
-- GitHub Actions bei Push auf `main`
-- Docker Image → Registry → Server
-
-### Pfad auf Hetzner (falls verwendet)
-```
-/opt/musikfuerfirmen/
-├── docker-compose.yml
-├── .env
-└── Dockerfile
-```
+- **Hosting**: Vercel (automatisches Deploy bei Push auf `main`)
+- **Backend-Services** (Hetzner CX32):
+  - n8n: Automation/Workflows (z.B. Kontaktformular, Anfragen)
+  - Supabase: Self-Hosted (falls Datenbank benötigt)
+- **Deployment**:
+  - Frontend: Vercel (automatisch)
+  - Backend-Services: Docker/Compose auf Hetzner
+- **Secrets-Management**:
+  - Vercel Environment Variables für Frontend
+  - `.env` für lokale Entwicklung (in .gitignore)
 
 ## Safety-Regeln für Git-Operationen durch LLM
 
