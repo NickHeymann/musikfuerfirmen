@@ -71,14 +71,6 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 text-center">
-        {/* Scarcity Badge */}
-        <div
-          className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/90 backdrop-blur-sm rounded-full text-white text-sm font-semibold mb-6 animate-pulse"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-        >
-          🔥 Nur noch 3 Dezember 2026-Termine verfügbar
-        </div>
-
         <h1
           className="hero-title text-white font-bold mb-6"
           style={{ fontFamily: "'Poppins', sans-serif" }}

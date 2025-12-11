@@ -105,11 +105,13 @@ export default function Header() {
 
                       {/* Dropdown Menu */}
                       <div
-                        className={`absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 transition-all duration-200 ${
+                        className={`absolute top-full left-0 mt-1 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 transition-all duration-200 ${
                           openDropdown === item.label
                             ? "opacity-100 visible translate-y-0"
                             : "opacity-0 invisible -translate-y-2 pointer-events-none"
                         }`}
+                        onMouseEnter={() => setOpenDropdown(item.label)}
+                        onMouseLeave={() => setOpenDropdown(null)}
                       >
                         {item.children.map((child) => (
                           <Link
