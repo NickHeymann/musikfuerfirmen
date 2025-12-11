@@ -102,7 +102,7 @@ export default function LogoAnimation() {
         </div>
 
         <div
-          className={`mff-tagline-elegant text-lg font-light text-[#666] tracking-[0.5px] relative inline-block whitespace-nowrap leading-[1.4] cursor-default ${isAnimated ? 'animate-tagline-appear' : 'opacity-0 -translate-y-[10px]'}`}
+          className={`mff-tagline-elegant text-lg font-light text-[#666] tracking-[0.5px] relative inline-block whitespace-nowrap leading-[1.4] cursor-default ${isAnimated ? 'animate-tagline-appear' : 'mff-tagline-hidden'}`}
           style={{
             fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
           }}
@@ -137,12 +137,19 @@ export default function LogoAnimation() {
           animation: metallic-swoosh 1.9s ease-out forwards;
         }
 
+        .mff-tagline-hidden {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+
         @keyframes tagline-appear {
           0% { opacity: 0; transform: translateY(-10px); }
           100% { opacity: 1; transform: translateY(0); }
         }
 
         .animate-tagline-appear {
+          opacity: 0;
+          transform: translateY(-10px);
           animation: tagline-appear 0.8s ease 1.0s forwards;
         }
 

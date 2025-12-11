@@ -75,7 +75,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="pt-[190px] pb-[193px] bg-white relative z-[1]">
+      <section className="pt-[190px] pb-[163px] bg-white relative z-[1]">
         <LogoAnimation />
       </section>
     </>

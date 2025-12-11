@@ -1,78 +1,110 @@
 "use client";
 
 import { teamMembers } from "@/data/team";
+import { getAssetPath, basePath } from "@/lib/config";
 
 export default function TeamSection() {
   return (
-    <>
-      <div className="body1">
-        {teamMembers.map((member) => (
-          <div key={member.name} className={`person person-${member.position}`}>
-            <div className="person-content">
-              <div className="container1">
-                <div className="container-inner">
-                  <div className="circle"></div>
-                  <img
-                    className={`img ${member.imageClass}`}
-                    src={member.image}
-                    alt={member.name}
-                  />
-                </div>
-              </div>
-              <div className="bio-text">
-                <h3>{member.bioTitle}</h3>
-                <p>{member.bioText}</p>
-              </div>
-              <div className="divider"></div>
-              <div className="name">{member.name}</div>
-              <div className="title">
-                {member.role}
-                <br />
-                {member.roleSecondLine}
-              </div>
+    <section className="team-section">
+      <div className="team-row">
+        {/* Bio Card Jonas - Links */}
+        <div className="bio-card">
+          <span className="bio-tag">{teamMembers[0].bioTitle}</span>
+          <p className="bio-text">{teamMembers[0].bioText}</p>
+          <a href={`${basePath}/ueber-uns`} className="mehr-link">
+            Mehr erfahren <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        {/* Person Jonas */}
+        <div className="person-card">
+          <div className="container1">
+            <div className="container-inner">
+              <div className="circle"></div>
+              <img
+                className={`img ${teamMembers[0].imageClass}`}
+                src={getAssetPath(teamMembers[0].image)}
+                alt={teamMembers[0].name}
+              />
             </div>
           </div>
-        ))}
+          <div className="divider"></div>
+          <div className="name">{teamMembers[0].name}</div>
+          <div className="title">
+            {teamMembers[0].role}<br />
+            {teamMembers[0].roleSecondLine}
+          </div>
+        </div>
+
+        {/* Person Nick */}
+        <div className="person-card">
+          <div className="container1">
+            <div className="container-inner">
+              <div className="circle"></div>
+              <img
+                className={`img ${teamMembers[1].imageClass}`}
+                src={getAssetPath(teamMembers[1].image)}
+                alt={teamMembers[1].name}
+              />
+            </div>
+          </div>
+          <div className="divider"></div>
+          <div className="name">{teamMembers[1].name}</div>
+          <div className="title">
+            {teamMembers[1].role}<br />
+            {teamMembers[1].roleSecondLine}
+          </div>
+        </div>
+
+        {/* Bio Card Nick - Rechts */}
+        <div className="bio-card">
+          <span className="bio-tag">{teamMembers[1].bioTitle}</span>
+          <p className="bio-text">{teamMembers[1].bioText}</p>
+          <a href={`${basePath}/ueber-uns`} className="mehr-link">
+            Mehr erfahren <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
 
       <style jsx>{`
-        .body1 {
-          align-items: flex-start;
-          background-color: #ffffff;
-          display: flex;
+        .team-section {
+          background: #fff;
+          padding: 60px 20px;
           font-family: "Poppins", sans-serif;
-          flex-wrap: wrap;
-          justify-content: center;
-          height: auto;
-          gap: 20px;
-          padding: 40px 20px;
         }
-        .person {
-          align-items: flex-start;
+
+        .team-row {
+          max-width: 1400px;
+          margin: 0 auto;
           display: flex;
-          flex-direction: row;
-          position: relative;
+          justify-content: center;
+          align-items: center;
+          gap: 40px;
         }
-        .person-content {
+
+        /* Original Person Card Styles */
+        .person-card {
           display: flex;
           flex-direction: column;
           align-items: center;
-          width: 340px;
-          position: relative;
+          flex-shrink: 0;
         }
+
         .container1 {
           border-radius: 50%;
           height: 400px;
           -webkit-tap-highlight-color: transparent;
-          transform: scale(0.60);
+          transform: scale(0.55);
           transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
           width: 400px;
           margin-bottom: -39px;
           cursor: pointer;
         }
+
         .container1:hover {
-          transform: scale(0.66);
+          transform: scale(0.60);
         }
+
         .container-inner {
           clip-path: path(
             "M 390,400 C 390,504.9341 304.9341,590 200,590 95.065898,590 10,504.9341 10,400 V 10 H 200 390 Z"
@@ -81,6 +113,7 @@ export default function TeamSection() {
           transform-origin: 50%;
           top: -200px;
         }
+
         .circle {
           background-color: #D4F4E8;
           border-radius: 50%;
@@ -91,6 +124,7 @@ export default function TeamSection() {
           top: 210px;
           width: 380px;
         }
+
         .img {
           pointer-events: none;
           position: relative;
@@ -98,102 +132,341 @@ export default function TeamSection() {
           transform-origin: 50% bottom;
           transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .container1:hover .img {
           transform: translateY(0) scale(1.2);
         }
+
         .img1 {
           left: 22px;
-          top: 174px;
+          top: 220px;
           width: 340px;
         }
+
         .img2 {
           left: -6px;
-          top: 160px;
+          top: 205px;
           width: 444px;
         }
+
         .divider {
           background-color: #BAD6EB;
           height: 1px;
           width: 160px;
           margin-bottom: 16px;
         }
+
         .name {
           color: #404245;
-          font-size: 36px;
+          font-size: 28px;
           font-weight: 600;
-          margin-top: 0;
-          margin-bottom: 14px;
+          margin-bottom: 10px;
           text-align: center;
         }
+
         .title {
           color: #333;
-          font-family: "Poppins", sans-serif;
-          font-size: 1rem;
+          font-size: 14px;
           text-align: center;
           font-weight: 300;
-          margin-top: 0;
-          min-height: 40px;
-          line-height: 1.6;
+          line-height: 1.5;
         }
-        .bio-text {
-          position: absolute;
-          top: 0;
+
+        /* Bio Card */
+        .bio-card {
           width: 280px;
-          background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
-          padding: 25px;
-          border-radius: 15px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-          opacity: 0;
-          transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
-          pointer-events: none;
-          z-index: 10;
-          white-space: pre-line;
+          background: #f8f9fa;
+          padding: 28px;
+          border-radius: 16px;
+          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+          flex-shrink: 0;
         }
-        .bio-text h3 {
-          font-size: 18px;
+
+        .bio-tag {
+          display: inline-block;
+          font-size: 11px;
           font-weight: 600;
-          color: #404245;
-          margin: 0 0 12px 0;
+          text-transform: uppercase;
+          letter-spacing: 1.2px;
+          color: #2DD4A8;
+          margin-bottom: 14px;
         }
-        .bio-text p {
+
+        .bio-text {
           font-size: 14px;
-          line-height: 1.6;
-          color: #404245;
-          margin: 0;
+          line-height: 1.7;
+          color: #555;
+          margin: 0 0 18px;
         }
-        .person-left .bio-text {
-          right: 100%;
-          margin-right: 30px;
-          transform: translateX(20px);
+
+        .mehr-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+          font-weight: 600;
+          color: #2DD4A8;
+          text-decoration: none;
+          transition: all 0.2s ease;
+          white-space: nowrap;
         }
-        .person-right .bio-text {
-          left: 100%;
-          margin-left: 30px;
-          transform: translateX(-20px);
+
+        .mehr-link svg {
+          flex-shrink: 0;
+          vertical-align: middle;
         }
-        .container1:hover ~ .bio-text {
-          opacity: 1;
-          transform: translateX(0);
-          transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1) 300ms, transform 400ms cubic-bezier(0.4, 0, 0.2, 1) 300ms;
+
+        .mehr-link:hover {
+          gap: 12px;
+          color: #22a883;
         }
-        @media (max-width: 1200px) {
-          .bio-text {
-            display: none;
+
+        /* Large Desktop (1600px+) */
+        @media (min-width: 1600px) {
+          .team-row {
+            gap: 50px;
+          }
+          .bio-card {
+            width: 320px;
+            padding: 32px;
+          }
+          .container1 {
+            transform: scale(0.60);
+          }
+          .container1:hover {
+            transform: scale(0.65);
+          }
+          .name {
+            font-size: 32px;
           }
         }
-        @media (max-width: 767px) {
-          .body1 {
-            align-items: center;
-            background-color: #f2f2f2;
-            display: flex;
-            font-family: "Poppins", sans-serif;
+
+        /* MacBook 16" (1400-1599px) */
+        @media (max-width: 1599px) and (min-width: 1400px) {
+          .team-row {
+            gap: 35px;
+          }
+          .bio-card {
+            width: 260px;
+            padding: 24px;
+          }
+          .container1 {
+            transform: scale(0.52);
+          }
+          .container1:hover {
+            transform: scale(0.57);
+          }
+        }
+
+        /* MacBook 14" (1200-1399px) */
+        @media (max-width: 1399px) and (min-width: 1200px) {
+          .team-row {
+            gap: 25px;
+          }
+          .bio-card {
+            width: 220px;
+            padding: 20px;
+          }
+          .bio-text {
+            font-size: 13px;
+          }
+          .container1 {
+            transform: scale(0.48);
+          }
+          .container1:hover {
+            transform: scale(0.52);
+          }
+          .name {
+            font-size: 24px;
+          }
+          .title {
+            font-size: 12px;
+          }
+        }
+
+        /* Small Laptop (1024-1199px) */
+        @media (max-width: 1199px) and (min-width: 1024px) {
+          .team-row {
+            gap: 20px;
+          }
+          .bio-card {
+            width: 200px;
+            padding: 18px;
+          }
+          .bio-tag {
+            font-size: 10px;
+          }
+          .bio-text {
+            font-size: 12px;
+            line-height: 1.6;
+          }
+          .mehr-link {
+            font-size: 12px;
+          }
+          .container1 {
+            transform: scale(0.42);
+          }
+          .container1:hover {
+            transform: scale(0.46);
+          }
+          .name {
+            font-size: 22px;
+          }
+          .title {
+            font-size: 11px;
+          }
+        }
+
+        /* iPad Landscape (900-1023px) */
+        @media (max-width: 1023px) and (min-width: 900px) {
+          .team-row {
             flex-wrap: wrap;
-            justify-content: center;
-            height: 100%;
-            gap: 0px;
+            gap: 30px;
+            max-width: 800px;
+          }
+          .bio-card {
+            width: calc(50% - 15px);
+            order: 3;
+          }
+          .bio-card:first-child {
+            order: 3;
+          }
+          .bio-card:last-child {
+            order: 4;
+          }
+          .person-card:nth-child(2) {
+            order: 1;
+          }
+          .person-card:nth-child(3) {
+            order: 2;
+          }
+          .container1 {
+            transform: scale(0.50);
+          }
+          .container1:hover {
+            transform: scale(0.54);
+          }
+        }
+
+        /* iPad Portrait (768-899px) */
+        @media (max-width: 899px) and (min-width: 768px) {
+          .team-row {
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 600px;
+          }
+          .bio-card {
+            width: calc(50% - 15px);
+            order: 3;
+          }
+          .bio-card:first-child {
+            order: 3;
+          }
+          .bio-card:last-child {
+            order: 4;
+          }
+          .person-card:nth-child(2) {
+            order: 1;
+          }
+          .person-card:nth-child(3) {
+            order: 2;
+          }
+          .container1 {
+            transform: scale(0.45);
+          }
+          .container1:hover {
+            transform: scale(0.48);
+          }
+          .name {
+            font-size: 24px;
+          }
+        }
+
+        /* Large Phone (480-767px) */
+        @media (max-width: 767px) and (min-width: 480px) {
+          .team-section {
+            padding: 40px 20px;
+          }
+          .team-row {
+            flex-direction: column;
+            gap: 10px;
+          }
+          .bio-card {
+            width: 100%;
+            max-width: 360px;
+            order: unset !important;
+          }
+          .person-card {
+            order: unset !important;
+          }
+          .bio-card:first-child {
+            order: 2 !important;
+          }
+          .person-card:nth-child(2) {
+            order: 1 !important;
+          }
+          .person-card:nth-child(3) {
+            order: 3 !important;
+          }
+          .bio-card:last-child {
+            order: 4 !important;
+          }
+          .container1 {
+            transform: scale(0.55);
+          }
+          .container1:hover {
+            transform: scale(0.58);
+          }
+          .name {
+            font-size: 28px;
+          }
+        }
+
+        /* Small Phone (<480px) */
+        @media (max-width: 479px) {
+          .team-section {
+            padding: 30px 16px;
+            background: #f9f9f9;
+          }
+          .team-row {
+            flex-direction: column;
+            gap: 8px;
+          }
+          .bio-card {
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+          }
+          .bio-card:first-child {
+            order: 2 !important;
+          }
+          .person-card:nth-child(2) {
+            order: 1 !important;
+          }
+          .person-card:nth-child(3) {
+            order: 3 !important;
+          }
+          .bio-card:last-child {
+            order: 4 !important;
+          }
+          .container1 {
+            transform: scale(0.50);
+          }
+          .container1:hover {
+            transform: scale(0.52);
+          }
+          .name {
+            font-size: 26px;
+          }
+          .title {
+            font-size: 13px;
+          }
+          .bio-text {
+            font-size: 13px;
           }
         }
       `}</style>
-    </>
+    </section>
   );
 }

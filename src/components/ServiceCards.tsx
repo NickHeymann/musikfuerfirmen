@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
+import { getAssetPath } from "@/lib/config";
 
 const services = [
   {
     number: "01",
     title: "Livebands",
+    image: "/images/services/liveband.jpg",
     texts: [
       "Unser absolutes Alleinstellungsmerkmal. Wir arbeiten mit einer festen Stammband, die wir persönlich kennen und die wir je nach Bedarf individuell für euch zusammenstellen und auf euer Event abstimmen.",
       "Viele Agenturen vermitteln nur Kontakte, die Bands kennen sie kaum persönlich. Bei musikfürfirmen.de läuft das anders. Wir arbeiten mit einer eingespielten Stammband, die je nach Eventgröße flexibel in unterschiedlichen Besetzungen auftritt.",
@@ -22,6 +25,7 @@ const services = [
   {
     number: "02",
     title: "DJ's",
+    image: "/images/services/dj.jpg",
     texts: [
       "Unsere DJs liefern euch den perfekten Mix aus Klassikern und aktuellen Hits, maßgeschneidert für euer Event und perfekt abgestimmt auf eure individuellen Musikwünsche.",
       "Ob entspannte Afterwork-Party oder festliches Firmenjubiläum: Wir finden über unser Netzwerk genau den richtigen DJ für euren Anlass. DJs lassen sich hervorragend mit einer Liveband kombinieren.",
@@ -37,6 +41,7 @@ const services = [
   {
     number: "03",
     title: "Technik",
+    image: "/images/services/technik.jpg",
     texts: [
       "Mit Musik- und Lichttechnik im Wert von über 100.000 € stellen wir für jede Eventgröße die perfekte Ausstattung damit unsere Künstler:innen ihre Performance optimal präsentieren können.",
       "Unser umfangreiches Equipment ermöglicht es uns, für Events jeder Größenordnung die ideale Sound- und Lichtausstattung bereitzustellen.",
@@ -118,9 +123,13 @@ export default function ServiceCards() {
               </div>
 
               <div className="mff-card-visual flex-none w-full h-[180px] md:h-auto md:w-[42%] relative order-1 md:order-2">
-                <div className="mff-card-image-placeholder absolute inset-0 flex items-center justify-center text-sm text-[#2DD4A8] opacity-40 bg-gradient-to-br from-[#e6faf5] to-[#d0f4eb]">
-                  Bild
-                </div>
+                <Image
+                  src={getAssetPath(service.image)}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 42vw"
+                />
               </div>
             </div>
           </div>
