@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { getAssetPath } from "@/lib/config";
 
 const sliderContent = ["Musik", "Livebands", "Djs", "Technik"];
 
@@ -43,6 +44,16 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Force video to play on mount (browser autoplay policies)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.play().catch(() => {
+        // Autoplay blocked - video will show poster
+      });
+    }
+  }, []);
+
   const handleScrollPromptClick = () => {
     const target = document.getElementById("waswirbieten");
     if (target) {
@@ -57,7 +68,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative flex items-center justify-center overflow-hidden" style={{ minHeight: "calc(100vh - 108px)" }}>
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
@@ -66,9 +77,9 @@ export default function Hero() {
           muted
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          poster="/images/hero-fallback.jpg"
+          poster={getAssetPath("/images/hero-fallback.jpg")}
         >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
+          <source src={getAssetPath("/videos/hero-background.mp4")} type="video/mp4" />
         </video>
         <div
           className="absolute inset-0"
@@ -79,7 +90,7 @@ export default function Hero() {
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 text-center">
         <div
           className="slider-container text-center text-white font-bold"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
+          style={{ fontFamily: "'Poppins', sans-serif", marginBottom: "160px" }}
         >
           <div
             id="slider"
@@ -125,58 +136,10 @@ export default function Hero() {
           </button>
         </div>
 
-        <ul
-          className="mff-btn-features max-w-[600px] mx-auto mt-[60px] px-4 md:pl-[140px] list-none flex flex-col items-center"
-          style={{ fontFamily: "'Poppins', sans-serif" }}
-        >
-          <li
-            className="w-full max-w-[600px] grid grid-cols-[20px_1fr] gap-x-3 text-white font-light my-[3px] opacity-0 animate-feature-text"
-            style={{
-              fontSize: "calc(14px + 2pt)",
-              animationDelay: "0.3s",
-              animationFillMode: "forwards"
-            }}
-          >
-            <span
-              className="text-[#B2EAD8] font-bold text-xl flex items-center justify-center opacity-0 scale-0 animate-check-pop"
-              style={{ animationDelay: "0s", animationFillMode: "forwards" }}
-            >
-              ✔
-            </span>
-            <span>100% unverbindlich</span>
-          </li>
-          <li
-            className="w-full max-w-[600px] grid grid-cols-[20px_1fr] gap-x-3 text-white font-light my-[3px] opacity-0 animate-feature-text"
-            style={{
-              fontSize: "calc(14px + 2pt)",
-              animationDelay: "0.9s",
-              animationFillMode: "forwards"
-            }}
-          >
-            <span
-              className="text-[#B2EAD8] font-bold text-xl flex items-center justify-center opacity-0 scale-0 animate-check-pop"
-              style={{ animationDelay: "0.6s", animationFillMode: "forwards" }}
-            >
-              ✔
-            </span>
-            <span>Antwort in 24h</span>
-          </li>
-          <li
-            className="w-full max-w-[600px] grid grid-cols-[20px_1fr] gap-x-3 text-white font-light my-[3px] opacity-0 animate-feature-text"
-            style={{
-              fontSize: "calc(14px + 2pt)",
-              animationDelay: "1.5s",
-              animationFillMode: "forwards"
-            }}
-          >
-            <span
-              className="text-[#B2EAD8] font-bold text-xl flex items-center justify-center opacity-0 scale-0 animate-check-pop"
-              style={{ animationDelay: "1.2s", animationFillMode: "forwards" }}
-            >
-              ✔
-            </span>
-            <span>Kostenloses Erstgespräch</span>
-          </li>
+        <ul className="mff-btn-features">
+          <li>Musik für jedes Firmenevent</li>
+          <li>Rundum-sorglos-Paket</li>
+          <li>Angebot innerhalb von 24 Stunden</li>
         </ul>
       </div>
 
@@ -223,6 +186,68 @@ export default function Hero() {
           animation: holderAnimation 3s;
         }
 
+        .mff-btn-features {
+          max-width: 350px;
+          margin: 60px auto 0;
+          padding: 0;
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          font-family: 'Poppins', sans-serif;
+        }
+
+        .mff-btn-features li {
+          width: 100%;
+          display: grid;
+          grid-template-columns: 20px 1fr;
+          column-gap: 12px;
+          font-size: calc(14px + 2pt);
+          font-weight: 300;
+          color: white;
+          margin: 3px 0;
+          opacity: 0;
+          animation: fadeInText 0.6s ease-out forwards;
+          text-align: left;
+        }
+
+        .mff-btn-features li:nth-child(1) {
+          animation-delay: 0.3s;
+        }
+
+        .mff-btn-features li:nth-child(2) {
+          animation-delay: 0.9s;
+        }
+
+        .mff-btn-features li:nth-child(3) {
+          animation-delay: 1.5s;
+        }
+
+        .mff-btn-features li::before {
+          content: '✔';
+          color: #B2EAD8;
+          font-weight: 700;
+          font-size: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transform: scale(0) rotate(-180deg);
+          animation: popInCheck 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        .mff-btn-features li:nth-child(1)::before {
+          animation-delay: 0s;
+        }
+
+        .mff-btn-features li:nth-child(2)::before {
+          animation-delay: 0.6s;
+        }
+
+        .mff-btn-features li:nth-child(3)::before {
+          animation-delay: 1.2s;
+        }
+
         @keyframes popInCheck {
           0% {
             opacity: 0;
@@ -237,10 +262,6 @@ export default function Hero() {
           }
         }
 
-        .animate-check-pop {
-          animation: popInCheck 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-        }
-
         @keyframes fadeInText {
           0% {
             opacity: 0;
@@ -250,10 +271,6 @@ export default function Hero() {
             opacity: 1;
             transform: translateX(0);
           }
-        }
-
-        .animate-feature-text {
-          animation: fadeInText 0.6s ease-out forwards;
         }
 
         @keyframes scrollBounce {
@@ -267,6 +284,18 @@ export default function Hero() {
 
         .animate-scroll-bounce {
           animation: scrollBounce 1.5s infinite;
+        }
+
+        @media (max-width: 768px) {
+          .mff-btn-features {
+            margin-top: 20px;
+            padding: 0 16px;
+          }
+
+          .mff-btn-features li {
+            font-size: 14px;
+            padding: 6px 0 6px 28px;
+          }
         }
       `}</style>
     </section>

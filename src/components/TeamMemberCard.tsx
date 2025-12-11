@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { getAssetPath } from "@/lib/config";
 
 interface TimelineEvent {
   year: string;
@@ -45,7 +46,7 @@ export default function TeamMemberCard({
       <div className="text-center mb-6">
         <div className="w-28 h-28 mx-auto rounded-full overflow-hidden bg-[#D4F4E8] relative mb-4">
           <Image
-            src={image}
+            src={getAssetPath(image)}
             alt={name}
             fill
             className="object-cover object-top scale-150"
@@ -191,7 +192,7 @@ export default function TeamMemberCard({
               <div className="w-full aspect-[16/10] bg-[#f5f5f5] rounded-lg overflow-hidden relative mb-3">
                 {event.image ? (
                   <Image
-                    src={event.image}
+                    src={getAssetPath(event.image)}
                     alt={event.title}
                     fill
                     className="object-cover"

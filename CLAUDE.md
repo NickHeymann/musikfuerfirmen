@@ -23,6 +23,24 @@ src/
 └── types/         # TypeScript interfaces
 ```
 
+## Deployment-Standards
+
+### Hosting (Vercel oder Hetzner)
+- **Option A**: Vercel für Next.js (einfach)
+- **Option B**: Docker auf Hetzner (mehr Kontrolle)
+
+### CI/CD
+- GitHub Actions bei Push auf `main`
+- Docker Image → Registry → Server
+
+### Pfad auf Hetzner (falls verwendet)
+```
+/opt/musikfuerfirmen/
+├── docker-compose.yml
+├── .env
+└── Dockerfile
+```
+
 ## Safety-Regeln für Git-Operationen durch LLM
 
 - Arbeite NIEMALS direkt auf dem Branch `main`, sondern immer auf Feature-/Fix-Branches (z.B. `feature/...`, `fix/...`, `refactor/...`).

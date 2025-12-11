@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { basePath } from "@/lib/config";
 
 const navItems = [
   { href: "/#waswirbieten", label: "Unsere Leistungen", isAnchor: true },
@@ -10,6 +12,7 @@ const navItems = [
 ];
 
 export default function Header() {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -36,16 +39,30 @@ export default function Header() {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isAnchor: boolean) => {
     if (!isAnchor) {
+      e.preventDefault();
       setIsMobileMenuOpen(false);
-      return; // Normale Navigation für externe Links
+      router.push(href);
+      return;
     }
 
     e.preventDefault();
     const targetId = href.replace("/#", "");
-    const target = document.getElementById(targetId);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.pushState(null, "", href);
+
+    // Check if we're on the main page
+    const isOnMainPage = window.location.pathname === "/" ||
+                         window.location.pathname === basePath ||
+                         window.location.pathname === basePath + "/";
+
+    if (isOnMainPage) {
+      // On main page - just scroll
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        window.history.pushState(null, "", `${basePath}/${href.replace("/", "")}`);
+      }
+    } else {
+      // On other page - navigate to main page with anchor
+      window.location.href = `${basePath}/#${targetId}`;
     }
     setIsMobileMenuOpen(false);
   };
@@ -59,25 +76,25 @@ export default function Header() {
         }`}
         style={{ backgroundColor: "#ffffff" }}
       >
-        <div className="header-inner max-w-[1500px] mx-auto px-[4vw]">
-          <div className="flex items-center justify-between h-[78px]">
+        <div className="header-inner w-full px-[80px]">
+          <div className="flex items-center justify-between h-[108px]">
             <div className="header-title">
               <Link
                 href="/"
-                className="text-base font-semibold text-black hover:opacity-70 transition-opacity duration-200"
+                className="text-[32px] font-medium text-black hover:opacity-70 transition-opacity duration-200"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
                 musikfürfirmen.de
               </Link>
             </div>
 
-            <nav className="header-nav hidden md:flex items-center gap-8">
+            <nav className="header-nav hidden md:flex items-center gap-14">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href, item.isAnchor)}
-                  className="text-sm font-normal text-black hover:opacity-70 transition-opacity duration-200"
+                  className="text-[17px] font-light text-black hover:opacity-70 transition-opacity duration-200"
                   style={{ fontFamily: "'Poppins', sans-serif" }}
                 >
                   {item.label}
@@ -122,7 +139,7 @@ export default function Header() {
         />
 
         <nav
-          className={`absolute top-[78px] left-0 right-0 bg-white shadow-lg transform transition-transform duration-300 ${
+          className={`absolute top-[108px] left-0 right-0 bg-white shadow-lg transform transition-transform duration-300 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
           style={{ backgroundColor: "#ffffff" }}
@@ -143,7 +160,7 @@ export default function Header() {
         </nav>
       </div>
 
-      <div className="h-[78px]" />
+      <div className="h-[108px]" />
     </>
   );
 }
