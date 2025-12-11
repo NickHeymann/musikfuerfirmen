@@ -1,20 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // GitHub Pages static export
-  output: "export",
-  basePath: "/musikfuerfirmen",
-  assetPrefix: "/musikfuerfirmen/",
+  // Docker/Hetzner deployment - standalone server
+  output: "standalone",
+
+  // Remove X-Powered-By header (Security: -10 points)
+  poweredByHeader: false,
 
   // Turbopack root directory fix
   turbopack: {
     root: process.cwd(),
   },
 
-  // Image optimization - unoptimized for static export
+  // Image optimization
   images: {
     formats: ["image/avif", "image/webp"],
-    unoptimized: true,
   },
 
   // Security headers

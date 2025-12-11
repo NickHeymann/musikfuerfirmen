@@ -1,12 +1,17 @@
 "use client";
 
 import Hero from "@/components/Hero";
+import TrustBar from "@/components/TrustBar";
+import LeadMagnetsBanner from "@/components/LeadMagnetsBanner";
 import ServiceCards from "@/components/ServiceCards";
 import ProcessSteps from "@/components/ProcessSteps";
+import Testimonials from "@/components/Testimonials";
+import PricingIndicator from "@/components/PricingIndicator";
 import TeamSection from "@/components/TeamSection";
 import FAQ from "@/components/FAQ";
 import LogoAnimation from "@/components/LogoAnimation";
 import HamburgAnimation from "@/components/HamburgAnimation";
+import ExitIntentModal from "@/components/ExitIntentModal";
 
 export default function Home() {
   const scrollToSection = (sectionId: string) => {
@@ -19,6 +24,8 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <TrustBar />
+      <LeadMagnetsBanner />
 
       <section id="waswirbieten" className="bg-white overflow-visible pt-[187px] scroll-mt-[0px]">
         <ServiceCards />
@@ -45,7 +52,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="wir" className="pt-[178px] bg-white">
+      <section id="testimonials" className="pt-[80px] bg-white">
+        <Testimonials />
+      </section>
+
+      <section id="wir" className="pt-[80px] bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className="text-center px-5 overflow-visible"
@@ -62,7 +73,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="faq" className="pt-[134px] bg-white">
+      <section id="preise" className="pt-[80px] bg-white">
+        <PricingIndicator />
+      </section>
+
+      <section id="faq" className="pt-[80px] bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             onClick={() => scrollToSection("faq")}
@@ -78,6 +93,8 @@ export default function Home() {
       <section className="pt-[190px] pb-[163px] bg-white relative z-[1]">
         <LogoAnimation />
       </section>
+
+      <ExitIntentModal />
     </>
   );
 }

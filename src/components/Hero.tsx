@@ -3,33 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { getAssetPath } from "@/lib/config";
 
-const sliderContent = ["Musik", "Livebands", "Djs", "Technik"];
-
 export default function Hero() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [letters, setLetters] = useState<string[]>([]);
-  const [isHolding, setIsHolding] = useState(false);
   const [scrollPromptVisible, setScrollPromptVisible] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const slide = () => {
-      const word = sliderContent[currentIndex];
-      setLetters(word.split(""));
-      setIsHolding(true);
-
-      setTimeout(() => {
-        setIsHolding(false);
-        setTimeout(() => {
-          setCurrentIndex((prev) => (prev + 1) % sliderContent.length);
-        }, 350);
-      }, 2650);
-    };
-
-    slide();
-    const interval = setInterval(slide, 3000);
-    return () => clearInterval(interval);
-  }, [currentIndex]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,6 +43,13 @@ export default function Hero() {
     window.dispatchEvent(new CustomEvent("openMFFCalculator"));
   };
 
+  const scrollToPreise = () => {
+    const target = document.getElementById("preise");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="relative flex items-center justify-center overflow-hidden" style={{ minHeight: "calc(100vh - 108px)" }}>
       <div className="absolute inset-0 z-0">
@@ -83,62 +66,55 @@ export default function Hero() {
         </video>
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.36)" }}
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.42)" }}
         />
       </div>
 
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 text-center">
+        {/* Scarcity Badge */}
         <div
-          className="slider-container text-center text-white font-bold"
-          style={{ fontFamily: "'Poppins', sans-serif", marginBottom: "160px" }}
+          className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/90 backdrop-blur-sm rounded-full text-white text-sm font-semibold mb-6 animate-pulse"
+          style={{ fontFamily: "'Poppins', sans-serif" }}
         >
-          <div
-            id="slider"
-            className="inline-flex flex-row gap-[5px] items-center justify-center flex-wrap"
-            style={{
-              fontSize: "clamp(31px, 5vw, 55px)",
-              letterSpacing: "1.5px"
-            }}
-          >
-            <span className="static-text whitespace-nowrap">Deine</span>
-            <div className="animated-section inline-flex items-center gap-[5px]">
-              <span
-                id="sliderValue"
-                className={`inline-flex text-[#B2EAD8] font-bold justify-start whitespace-nowrap text-left ${
-                  isHolding ? "holder-animation" : ""
-                }`}
-                style={{ letterSpacing: "1.5px" }}
-              >
-                {letters.map((letter, index) => (
-                  <span
-                    key={`${currentIndex}-${index}`}
-                    className="inline-block animate-letter-fade"
-                    style={{
-                      animationDelay: `${index * 0.04 + 0.05}s`,
-                    }}
-                  >
-                    {letter === " " ? "\u00A0" : letter}
-                  </span>
-                ))}
-              </span>
-              <span className="static-text whitespace-nowrap">für Firmenevents!</span>
-            </div>
-          </div>
+          🔥 Nur noch 3 Dezember 2026-Termine verfügbar
         </div>
 
-        <div className="mt-12">
+        <h1
+          className="hero-title text-white font-bold mb-6"
+          style={{ fontFamily: "'Poppins', sans-serif" }}
+        >
+          Firmenevents 2026, die eure Mitarbeiter noch Monate später feiern
+        </h1>
+
+        <p
+          className="hero-subtitle text-white/90 mb-12 max-w-[700px] mx-auto"
+          style={{ fontFamily: "'Poppins', sans-serif" }}
+        >
+          Livebands, DJs und Technik für unvergessliche Firmenevents in Hamburg und deutschlandweit.
+          Über 500 Events seit 2019 – Jetzt für 2026 planen!
+        </p>
+
+        <div className="cta-buttons-container">
           <button
             onClick={openCalculator}
-            className="mff-open-calculator-btn inline-block mx-auto px-12 py-[18px] bg-white text-[#292929] rounded-[50px] text-lg font-medium cursor-pointer transition-all duration-300 hover:bg-[#B2EAD8] hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)]"
+            className="cta-primary"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
-            Unverbindliches Angebot anfragen
+            Jetzt Angebot anfragen
+          </button>
+
+          <button
+            onClick={scrollToPreise}
+            className="cta-secondary"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+          >
+            Preise ansehen
           </button>
         </div>
 
         <ul className="mff-btn-features">
-          <li>Musik für jedes Firmenevent</li>
-          <li>Rundum-sorglos-Paket</li>
+          <li>Frühbucher-Rabatt für 2026 Events (bis zu 15%)</li>
+          <li>Rundum-sorglos-Paket inkl. Technik & GEMA</li>
           <li>Angebot innerhalb von 24 Stunden</li>
         </ul>
       </div>
@@ -160,116 +136,113 @@ export default function Hero() {
       </div>
 
       <style jsx>{`
-        @keyframes letterFade {
-          0% {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-letter-fade {
-          animation: letterFade 0.35s forwards;
+        .hero-title {
+          font-size: clamp(32px, 5vw, 58px);
+          line-height: 1.15;
+          letter-spacing: -0.02em;
+          animation: fadeInUp 0.8s ease-out forwards;
           opacity: 0;
         }
 
-        @keyframes holderAnimation {
-          0% { opacity: 1; }
-          88% { opacity: 1; }
-          100% { opacity: 0; }
+        .hero-subtitle {
+          font-size: clamp(16px, 2.5vw, 20px);
+          line-height: 1.6;
+          font-weight: 300;
+          animation: fadeInUp 0.8s ease-out 0.2s forwards;
+          opacity: 0;
         }
 
-        .holder-animation {
-          animation: holderAnimation 3s;
+        .cta-buttons-container {
+          display: flex;
+          gap: 16px;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-bottom: 40px;
+          animation: fadeInUp 0.8s ease-out 0.4s forwards;
+          opacity: 0;
+        }
+
+        .cta-primary {
+          padding: 16px 32px;
+          background: linear-gradient(135deg, #2DD4A8 0%, #22a883 100%);
+          color: white;
+          border: none;
+          border-radius: 50px;
+          font-size: 17px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 20px rgba(45, 212, 168, 0.3);
+        }
+
+        .cta-primary:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 30px rgba(45, 212, 168, 0.4);
+          background: linear-gradient(135deg, #22a883 0%, #1d8c6d 100%);
+        }
+
+        .cta-secondary {
+          padding: 16px 32px;
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+          border: 2px solid white;
+          border-radius: 50px;
+          font-size: 17px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(10px);
+        }
+
+        .cta-secondary:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: translateY(-3px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         }
 
         .mff-btn-features {
-          max-width: 350px;
-          margin: 60px auto 0;
+          max-width: 450px;
+          margin: 0 auto;
           padding: 0;
           list-style: none;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           font-family: 'Poppins', sans-serif;
+          animation: fadeInUp 0.8s ease-out 0.6s forwards;
+          opacity: 0;
         }
 
         .mff-btn-features li {
           width: 100%;
           display: grid;
-          grid-template-columns: 20px 1fr;
+          grid-template-columns: 24px 1fr;
           column-gap: 12px;
-          font-size: calc(14px + 2pt);
-          font-weight: 300;
+          font-size: 16px;
+          font-weight: 400;
           color: white;
-          margin: 3px 0;
-          opacity: 0;
-          animation: fadeInText 0.6s ease-out forwards;
+          margin: 8px 0;
           text-align: left;
         }
 
-        .mff-btn-features li:nth-child(1) {
-          animation-delay: 0.3s;
-        }
-
-        .mff-btn-features li:nth-child(2) {
-          animation-delay: 0.9s;
-        }
-
-        .mff-btn-features li:nth-child(3) {
-          animation-delay: 1.5s;
-        }
-
         .mff-btn-features li::before {
-          content: '✔';
-          color: #B2EAD8;
+          content: '✓';
+          color: #2DD4A8;
           font-weight: 700;
-          font-size: 20px;
+          font-size: 22px;
           display: flex;
           align-items: center;
           justify-content: center;
-          opacity: 0;
-          transform: scale(0) rotate(-180deg);
-          animation: popInCheck 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
         }
 
-        .mff-btn-features li:nth-child(1)::before {
-          animation-delay: 0s;
-        }
-
-        .mff-btn-features li:nth-child(2)::before {
-          animation-delay: 0.6s;
-        }
-
-        .mff-btn-features li:nth-child(3)::before {
-          animation-delay: 1.2s;
-        }
-
-        @keyframes popInCheck {
-          0% {
+        @keyframes fadeInUp {
+          from {
             opacity: 0;
-            transform: scale(0) rotate(-180deg);
+            transform: translateY(20px);
           }
-          70% {
-            transform: scale(1.2) rotate(10deg);
-          }
-          100% {
+          to {
             opacity: 1;
-            transform: scale(1) rotate(0deg);
-          }
-        }
-
-        @keyframes fadeInText {
-          0% {
-            opacity: 0;
-            transform: translateX(-10px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
           }
         }
 
@@ -287,14 +260,54 @@ export default function Hero() {
         }
 
         @media (max-width: 768px) {
+          .hero-title {
+            font-size: 28px;
+            margin-bottom: 16px;
+          }
+
+          .hero-subtitle {
+            font-size: 15px;
+            margin-bottom: 32px;
+          }
+
+          .cta-buttons-container {
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+          }
+
+          .cta-primary,
+          .cta-secondary {
+            width: 100%;
+            max-width: 320px;
+            padding: 14px 24px;
+            font-size: 16px;
+          }
+
           .mff-btn-features {
-            margin-top: 20px;
+            margin-top: 0;
             padding: 0 16px;
+            max-width: 100%;
           }
 
           .mff-btn-features li {
             font-size: 14px;
-            padding: 6px 0 6px 28px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-title {
+            font-size: 24px;
+          }
+
+          .hero-subtitle {
+            font-size: 14px;
+          }
+
+          .cta-primary,
+          .cta-secondary {
+            font-size: 15px;
+            padding: 12px 20px;
           }
         }
       `}</style>

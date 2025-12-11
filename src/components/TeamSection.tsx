@@ -1,7 +1,7 @@
 "use client";
 
 import { teamMembers } from "@/data/team";
-import { getAssetPath, basePath } from "@/lib/config";
+import { getAssetPath } from "@/lib/config";
 
 export default function TeamSection() {
   return (
@@ -11,7 +11,7 @@ export default function TeamSection() {
         <div className="bio-card">
           <span className="bio-tag">{teamMembers[0].bioTitle}</span>
           <p className="bio-text">{teamMembers[0].bioText}</p>
-          <a href={`${basePath}/ueber-uns`} className="mehr-link">
+          <a href="/ueber-uns" className="mehr-link">
             Mehr erfahren <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -21,11 +21,16 @@ export default function TeamSection() {
           <div className="container1">
             <div className="container-inner">
               <div className="circle"></div>
-              <img
-                className={`img ${teamMembers[0].imageClass}`}
-                src={getAssetPath(teamMembers[0].image)}
-                alt={teamMembers[0].name}
-              />
+              <picture>
+                <source srcSet={getAssetPath("/images/team/jonas.avif")} type="image/avif" />
+                <source srcSet={getAssetPath("/images/team/jonas.webp")} type="image/webp" />
+                <img
+                  className={`img ${teamMembers[0].imageClass}`}
+                  src={getAssetPath(teamMembers[0].image)}
+                  alt={teamMembers[0].name}
+                  loading="lazy"
+                />
+              </picture>
             </div>
           </div>
           <div className="divider"></div>
@@ -41,11 +46,16 @@ export default function TeamSection() {
           <div className="container1">
             <div className="container-inner">
               <div className="circle"></div>
-              <img
-                className={`img ${teamMembers[1].imageClass}`}
-                src={getAssetPath(teamMembers[1].image)}
-                alt={teamMembers[1].name}
-              />
+              <picture>
+                <source srcSet={getAssetPath("/images/team/nick.avif")} type="image/avif" />
+                <source srcSet={getAssetPath("/images/team/nick.webp")} type="image/webp" />
+                <img
+                  className={`img ${teamMembers[1].imageClass}`}
+                  src={getAssetPath(teamMembers[1].image)}
+                  alt={teamMembers[1].name}
+                  loading="lazy"
+                />
+              </picture>
             </div>
           </div>
           <div className="divider"></div>
@@ -60,7 +70,7 @@ export default function TeamSection() {
         <div className="bio-card">
           <span className="bio-tag">{teamMembers[1].bioTitle}</span>
           <p className="bio-text">{teamMembers[1].bioText}</p>
-          <a href={`${basePath}/ueber-uns`} className="mehr-link">
+          <a href="/ueber-uns" className="mehr-link">
             Mehr erfahren <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
           </a>
         </div>

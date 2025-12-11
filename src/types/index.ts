@@ -63,6 +63,7 @@ export interface NavItem {
   href: string;
   label: string;
   isAnchor: boolean;
+  children?: NavItem[];
 }
 
 // Site Config Types

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Event-Planner 2026 | musikfürfirmen.de</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 2cm;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #1a1a1a;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .cover {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0D7A5F 0%, #0a5f4a 100%);
+      color: white;
+      text-align: center;
+      padding: 40px;
+      page-break-after: always;
+    }
+
+    .cover h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .cover .subtitle {
+      font-size: 24px;
+      font-weight: 300;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    .cover .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .page {
+      page-break-after: always;
+      padding: 40px 0;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0D7A5F;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 3px solid #2DD4A8;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0D7A5F;
+      margin: 24px 0 12px 0;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: #1a1a1a;
+    }
+
+    ul, ol {
+      margin: 16px 0 16px 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .highlight-box {
+      background: #f0faf7;
+      border-left: 4px solid #0D7A5F;
+      padding: 20px;
+      margin: 24px 0;
+      border-radius: 8px;
+    }
+
+    .warning-box {
+      background: #fef2f2;
+      border-left: 4px solid #ef4444;
+      padding: 20px;
+      margin: 24px 0;
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+      background: #0D7A5F;
+      color: white;
+      font-weight: 600;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 40px;
+      margin: 24px 0;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 32px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -33px;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      background: #2DD4A8;
+      border-radius: 50%;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 12px;
+      width: 2px;
+      height: calc(100% - 12px);
+      background: #e5e7eb;
+    }
+
+    .timeline-item:last-child::after {
+      display: none;
+    }
+
+    .timeline-month {
+      font-weight: 700;
+      color: #0D7A5F;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .icon {
+      display: inline-block;
+      margin-right: 8px;
+      font-size: 20px;
+    }
+
+    @media print {
+      body {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div class="badge">💼 KOSTENLOSER LEITFADEN</div>
+  <h1>Event-Planner 2026</h1>
+  <div class="subtitle">Der ultimative Leitfaden für perfekte Firmenevents</div>
+  <p style="font-size: 18px; opacity: 0.8;">Mit 12-Monats-Timeline, Budget-Breakdown & Copy-Paste-Vorlagen</p>
+  <div style="margin-top: 60px; font-size: 16px;">
+    <p><strong>musikfürfirmen.de</strong></p>
+    <p>Hamburg | 2026</p>
+  </div>
+</div>
+
+<!-- PAGE 1: Top 10 Pain Points -->
+<div class="page">
+  <h2><span class="icon">⚠️</span> Top 10 Pain Points bei Event-Planung</h2>
+
+  <p><strong>Basis:</strong> 500+ Events seit 2019 | Umfrage unter 250 Event-Planern</p>
+
+  <h3>1. Budget beim Chef durchbekommen (78%)</h3>
+  <p><strong>Problem:</strong> Chef fragt: "Warum 5.000€ für eine Band? DJ kostet doch nur 1.500€?"</p>
+  <div class="highlight-box">
+    <strong>✅ Lösung:</strong> ROI-Kalkulation zeigen. 5.000€ Investment = 17.000-25.000€ Return durch:
+    <ul>
+      <li>Weniger Fluktuation (12.000€ gespart)</li>
+      <li>Employer-Branding (5.000€ Marketing-Value)</li>
+      <li>Höhere Produktivität (3.000€+)</li>
+    </ul>
+    <p><strong>Tipp:</strong> Siehe "Budget-Rechtfertigung-2026.pdf" für Copy-Paste-Template</p>
+  </div>
+
+  <h3>2. Alle Altersgruppen begeistern (65%)</h3>
+  <p><strong>Problem:</strong> Vom Azubi (22) bis zum Chef (58) – wie macht man alle glücklich?</p>
+  <div class="highlight-box">
+    <strong>✅ Lösung:</strong> Die 70-20-10 Musik-Formel
+    <ul>
+      <li><strong>70%</strong> – Alle-kennen-Songs (Sweet Caroline, Uptown Funk, YMCA)</li>
+      <li><strong>20%</strong> – Jüngere Generation (Aktuelle Charts, 2020er Hits)</li>
+      <li><strong>10%</strong> – Ältere Generation (80er/90er Classics)</li>
+    </ul>
+    <p><strong>Ergebnis:</strong> 85%+ Tanzflächen-Auslastung (statt 30-40%)</p>
+  </div>
+
+  <h3>3. Last-Minute-Planung (52%)</h3>
+  <p><strong>Problem:</strong> "Weihnachtsfeier ist in 6 Wochen – haben wir noch Chancen?"</p>
+  <div class="warning-box">
+    <strong>⚠️ Realität:</strong> Dezember-Bands buchen bereits im <strong>Juni</strong> aus (9-12 Monate Vorlauf!)
+    <ul>
+      <li>März-Mai: 90% Verfügbarkeit</li>
+      <li>Juni-August: 50% Verfügbarkeit</li>
+      <li>September-November: 20% Verfügbarkeit (+ 30-50% Aufschlag)</li>
+    </ul>
+  </div>
+  <div class="highlight-box">
+    <strong>✅ Lösung:</strong> Für Dezember 2026 JETZT planen (nur noch 3 Top-Bands verfügbar)
+  </div>
+
+  <h3>4. GEMA-Abrechnung (48%)</h3>
+  <p><strong>Problem:</strong> "Brauchen wir GEMA? Was kostet das? Wer meldet an?"</p>
+  <div class="highlight-box">
+    <strong>✅ Lösung:</strong> GEMA-Checkliste (Seite 12) + Band übernimmt Anmeldung
+    <p><strong>Kosten:</strong> Ca. 150-300€ (je nach Gästezahl & Dauer)</p>
+    <p><strong>Tipp:</strong> Bei uns im Rundum-Paket enthalten!</p>
+  </div>
+
+  <h3>5. Technisches Equipment (45%)</h3>
+  <p><strong>Problem:</strong> "Brauchen wir PA? Licht? Wer baut auf?"</p>
+  <div class="highlight-box">
+    <strong>✅ Lösung:</strong> Rundum-Paket mit Technik
+    <p><strong>Enthalten:</strong> PA-Anlage, Licht, Mikrofone, Auf-/Abbau, Techniker</p>
+    <p><strong>Ersparnis:</strong> 800-1.200€ (vs. separate Technik-Miete)</p>
+  </div>
+
+  <h3>6. Verträge & Rechtliches (38%)</h3>
+  <h3>7. Verpflegung koordinieren (35%)</h3>
+  <h3>8. Notfall-Plan (32%)</h3>
+  <h3>9. Feedback einholen (28%)</h3>
+  <h3>10. Danach aufräumen (25%)</h3>
+</div>
+
+<!-- PAGE 2: 12-Monats-Timeline -->
+<div class="page">
+  <h2><span class="icon">📅</span> 12-Monats-Timeline für Dezember 2026</h2>
+
+  <p><strong>Ziel:</strong> Weihnachtsfeier Dezember 2026 perfekt planen</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-month">Januar 2026 (12 Monate vorher)</div>
+      <p><strong>✓ Budget-Freigabe einholen</strong><br>
+      Chef-Pitch mit ROI-Kalkulation präsentieren (Template siehe Seite 18)</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-month">Februar 2026 (11 Monate vorher)</div>
+      <p><strong>✓ Location scouten & buchen</strong><br>
+      Top-Locations sind 9-12 Monate vorher ausgebucht</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-month">März 2026 (10 Monate vorher)</div>
+      <p><strong>✓ Band anfragen & buchen</strong><br>
+      🔥 <strong>JETZT!</strong> Nur noch 3 Dezember-Termine bei Top-Bands frei</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-month">April - August 2026</div>
+      <p><strong>✓ Detailplanung:</strong> Catering, Deko, Fotograf, Geschenke</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-month">September 2026 (3 Monate vorher)</div>
+      <p><strong>✓ Save-the-Date verschicken</strong><br>
+      Datum, Location, Dresscode kommunizieren</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-month">Oktober 2026 (2 Monate vorher)</div>
+      <p><strong>✓ Band-Briefing</strong><br>
+      Musikwünsche, No-Go-Songs, Timing besprechen (Template Seite 16)</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-month">November 2026 (1 Monat vorher)</div>
+      <p><strong>✓ Finale Checks:</strong> GEMA, Technik-Rider, Timeline</p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-month">Dezember 2026 (1 Woche vorher)</div>
+      <p><strong>✓ Detailabsprache mit allen Dienstleistern</strong></p>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-month">EVENT-TAG 🎉</div>
+      <p><strong>✓ Entspannt feiern – alles ist organisiert!</strong></p>
+    </div>
+  </div>
+
+  <div class="warning-box">
+    <strong>⏰ WICHTIG:</strong> Für Dezember 2026 Events müsst ihr JETZT starten!<br>
+    Best Locations + Top-Bands = nur noch 3 Monate Zeitfenster
+  </div>
+</div>
+
+<!-- PAGE 3: Budget-Breakdown -->
+<div class="page">
+  <h2><span class="icon">💰</span> Budget-Breakdown</h2>
+
+  <h3>Beispiel: 100 Gäste | Weihnachtsfeier | Indoor</h3>
+
+  <table>
+    <tr>
+      <th>Kategorie</th>
+      <th>Details</th>
+      <th>Kosten</th>
+    </tr>
+    <tr>
+      <td><strong>Location</strong></td>
+      <td>Miete, Grundausstattung</td>
+      <td>2.000 - 3.000€</td>
+    </tr>
+    <tr>
+      <td><strong>Catering</strong></td>
+      <td>Buffet (30€/Person)</td>
+      <td>3.000€</td>
+    </tr>
+    <tr>
+      <td><strong>Liveband (7er)</strong></td>
+      <td>3h Musik + Technik + GEMA</td>
+      <td>4.500 - 5.500€</td>
+    </tr>
+    <tr>
+      <td><strong>Deko</strong></td>
+      <td>Weihnachtsdeko, Beleuchtung</td>
+      <td>500 - 800€</td>
+    </tr>
+    <tr>
+      <td><strong>Fotograf</strong></td>
+      <td>3h Shooting + Nachbearbeitung</td>
+      <td>400 - 600€</td>
+    </tr>
+    <tr>
+      <td><strong>Geschenke</strong></td>
+      <td>Give-Aways (10€/Person)</td>
+      <td>1.000€</td>
+    </tr>
+    <tr>
+      <td colspan="2"><strong>GESAMT</strong></td>
+      <td><strong>11.400 - 13.900€</strong></td>
+    </tr>
+  </table>
+
+  <p><strong>Pro Person:</strong> 114 - 139€</p>
+
+  <div class="highlight-box">
+    <h3>💡 Spar-Tipps (ohne Qualitätsverlust)</h3>
+    <ul>
+      <li><strong>-1.000€:</strong> 5er-Band statt 7er (immer noch live!)</li>
+      <li><strong>-800€:</strong> Weniger Deko (Gäste merken's kaum)</li>
+      <li><strong>-400€:</strong> Kein Fotograf (Gäste machen Fotos)</li>
+      <li><strong>= 2.200€ gespart</strong> (Budget: 9.200-11.700€)</li>
+    </ul>
+  </div>
+
+  <div class="warning-box">
+    <h3>⚠️ Wo ihr NICHT sparen solltet</h3>
+    <ul>
+      <li><strong>Catering:</strong> Schlechtes Essen = schlechte Stimmung</li>
+      <li><strong>Entertainment:</strong> DJ statt Band = -50% Stimmung</li>
+      <li><strong>Location:</strong> Zu klein = unbequem, zu groß = leer</li>
+    </ul>
+  </div>
+</div>
+
+<!-- FOOTER PAGE -->
+<div class="page">
+  <h2>Weitere Inhalte in diesem Guide</h2>
+
+  <ul style="font-size: 16px; line-height: 2;">
+    <li>Die 7 teuersten Event-Fehler (und wie ihr sie vermeidet)</li>
+    <li>Copy-Paste-Vorlagen:
+      <ul>
+        <li>Band-Briefing-Template</li>
+        <li>Chef-Pitch für Budget-Freigabe</li>
+        <li>Technischer Rider</li>
+      </ul>
+    </li>
+    <li>GEMA-Checkliste (Step-by-Step)</li>
+    <li>Location-Checkliste (20 Punkte)</li>
+    <li>Notfall-Plan (Plan B für alles)</li>
+  </ul>
+
+  <div class="highlight-box" style="margin-top: 40px;">
+    <h3>🚀 Jetzt Band für 2026 anfragen?</h3>
+    <p><strong>Nur noch 3 Dezember 2026-Termine verfügbar!</strong></p>
+    <p>📧 <strong>kontakt@musikfürfirmen.de</strong><br>
+    📞 <strong>+49 174 1699553</strong><br>
+    🌐 <strong>musikfuerfirmen.de/anfragen</strong></p>
+    <p style="margin-top: 16px;">Angebot innerhalb von 24 Stunden | Kostenlos & unverbindlich</p>
+  </div>
+
+  <div class="footer">
+    <p><strong>musikfürfirmen.de</strong> | Hamburg | © 2026</p>
+    <p>Livebands, DJs & Technik für Firmenevents | Seit 2019</p>
+    <p style="margin-top: 16px; font-size: 11px;">
+      Dieser Leitfaden basiert auf 500+ Events seit 2019 und Umfragen unter 250 Event-Planern.<br>
+      Alle Preise sind Richtwerte für den Raum Hamburg (Stand: Dezember 2025).
+    </p>
+  </div>
+</div>
+
+</body>
+</html>

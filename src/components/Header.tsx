@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { navLinks } from "@/config/site";
-import { basePath } from "@/lib/config";
 
 export default function Header() {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,20 +45,18 @@ export default function Header() {
     const targetId = href.replace("/#", "");
 
     // Check if we're on the main page
-    const isOnMainPage = window.location.pathname === "/" ||
-                         window.location.pathname === basePath ||
-                         window.location.pathname === basePath + "/";
+    const isOnMainPage = window.location.pathname === "/";
 
     if (isOnMainPage) {
       // On main page - just scroll
       const target = document.getElementById(targetId);
       if (target) {
         target.scrollIntoView({ behavior: "smooth", block: "start" });
-        window.history.pushState(null, "", `${basePath}/${href.replace("/", "")}`);
+        window.history.pushState(null, "", `/${href.replace("/", "")}`);
       }
     } else {
       // On other page - navigate to main page with anchor
-      window.location.href = `${basePath}/#${targetId}`;
+      window.location.href = `/#${targetId}`;
     }
     setIsMobileMenuOpen(false);
   };
@@ -84,17 +83,63 @@ export default function Header() {
             </div>
 
             <nav className="header-nav hidden md:flex items-center gap-14">
-              {navLinks.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href, item.isAnchor)}
-                  className="text-[17px] font-light text-black hover:opacity-70 transition-opacity duration-200"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
-                >
-                  {item.label}
-                </a>
-              ))}
+              {navLinks.map((item) => {
+                // Item with dropdown
+                if (item.children && item.children.length > 0) {
+                  return (
+                    <div
+                      key={item.label}
+                      className="relative"
+                      onMouseEnter={() => setOpenDropdown(item.label)}
+                      onMouseLeave={() => setOpenDropdown(null)}
+                    >
+                      <button
+                        className="text-[17px] font-light text-black hover:opacity-70 transition-opacity duration-200 flex items-center gap-1"
+                        style={{ fontFamily: "'Poppins', sans-serif" }}
+                      >
+                        {item.label}
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      <div
+                        className={`absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 transition-all duration-200 ${
+                          openDropdown === item.label
+                            ? "opacity-100 visible translate-y-0"
+                            : "opacity-0 invisible -translate-y-2 pointer-events-none"
+                        }`}
+                      >
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className="block px-4 py-3 text-[15px] font-light text-black hover:bg-[#f0faf7] hover:text-[#0D7A5F] transition-all"
+                            style={{ fontFamily: "'Poppins', sans-serif" }}
+                            onClick={() => setOpenDropdown(null)}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+
+                // Regular item
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href, item.isAnchor)}
+                    className="text-[17px] font-light text-black hover:opacity-70 transition-opacity duration-200"
+                    style={{ fontFamily: "'Poppins', sans-serif" }}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
             </nav>
 
             <button
@@ -121,6 +166,7 @@ export default function Header() {
         <div className="h-[1px]" style={{ backgroundColor: "#e5e7eb" }} />
       </header>
 
+      {/* Mobile Menu */}
       <div
         className={`fixed inset-0 z-[9998] md:hidden transition-all duration-300 ${
           isMobileMenuOpen
@@ -134,23 +180,82 @@ export default function Header() {
         />
 
         <nav
-          className={`absolute top-[108px] left-0 right-0 bg-white shadow-lg transform transition-transform duration-300 ${
+          className={`absolute top-[108px] left-0 right-0 bg-white shadow-lg transform transition-transform duration-300 max-h-[calc(100vh-108px)] overflow-y-auto ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
           style={{ backgroundColor: "#ffffff" }}
         >
           <div className="py-4 px-6">
-            {navLinks.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href, item.isAnchor)}
-                className="block py-4 text-base font-normal text-black hover:opacity-70 transition-opacity"
-                style={{ fontFamily: "'Poppins', sans-serif" }}
-              >
-                {item.label}
-              </a>
-            ))}
+            {navLinks.map((item) => {
+              // Item with dropdown (mobile accordion)
+              if (item.children && item.children.length > 0) {
+                return (
+                  <div key={item.label} className="border-b border-gray-100">
+                    <button
+                      onClick={() =>
+                        setMobileOpenDropdown(
+                          mobileOpenDropdown === item.label ? null : item.label
+                        )
+                      }
+                      className="w-full flex items-center justify-between py-4 text-base font-normal text-black hover:opacity-70 transition-opacity"
+                      style={{ fontFamily: "'Poppins', sans-serif" }}
+                    >
+                      {item.label}
+                      <svg
+                        className={`w-5 h-5 transition-transform duration-200 ${
+                          mobileOpenDropdown === item.label ? "rotate-180" : ""
+                        }`}
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
+
+                    {/* Mobile Dropdown Content */}
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ${
+                        mobileOpenDropdown === item.label
+                          ? "max-h-96 pb-2"
+                          : "max-h-0"
+                      }`}
+                    >
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            setMobileOpenDropdown(null);
+                          }}
+                          className="block py-3 pl-4 text-sm font-light text-gray-700 hover:text-[#0D7A5F] transition-colors"
+                          style={{ fontFamily: "'Poppins', sans-serif" }}
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
+              // Regular item
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href, item.isAnchor)}
+                  className="block py-4 text-base font-normal text-black hover:opacity-70 transition-opacity border-b border-gray-100"
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
           </div>
         </nav>
       </div>

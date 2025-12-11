@@ -24,6 +24,16 @@ export const siteConfig: SiteConfig = {
 // Navigation Links
 export const navLinks: NavItem[] = [
   { href: "/#waswirbieten", label: "Unsere Leistungen", isAnchor: true },
+  {
+    href: "#",
+    label: "Kostenlose Ratgeber",
+    isAnchor: false,
+    children: [
+      { href: "/event-planner-2026", label: "Event-Planner 2026", isAnchor: false },
+      { href: "/budget-rechtfertigung", label: "Budget durchsetzen", isAnchor: false },
+      { href: "/budget-rechner", label: "Budget-Rechner", isAnchor: false },
+    ]
+  },
   { href: "/ueber-uns", label: "Über Uns", isAnchor: false },
   { href: "/#faq", label: "FAQ", isAnchor: true },
 ];
