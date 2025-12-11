@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ModalProvider from "@/components/ModalProvider";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { siteConfig } from "@/config/site";
 import { generateJsonLd } from "@/data/jsonLd";
 
@@ -105,6 +106,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        <GoogleAnalytics />
         <ModalProvider>
           <Header />
           <main>{children}</main>
