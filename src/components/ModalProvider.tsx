@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import ContactModal from "./ContactModal";
+import { ContactModal } from "./contact";
 
 interface ModalContextType {
   openContactModal: () => void;

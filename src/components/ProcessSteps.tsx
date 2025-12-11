@@ -1,40 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
-interface ServiceBlock {
-  id: number;
-  title: string;
-  text: string;
-  highlight: string;
-}
-
-const serviceBlocks: ServiceBlock[] = [
-  {
-    id: 1,
-    title: "60 Sekunden",
-    text: "Schickt uns eure Anfrage innerhalb von ",
-    highlight: "60 Sekunden",
-  },
-  {
-    id: 2,
-    title: "24 Stunden",
-    text: "Erhaltet ein kostenloses Angebot innerhalb von ",
-    highlight: "24 Stunden",
-  },
-  {
-    id: 3,
-    title: "Rundum-Service",
-    text: "Genießt ",
-    highlight: "professionelle Betreuung",
-  },
-];
-
-const blockDescriptions = [
-  " über unser Formular. Schnell, einfach und unkompliziert.",
-  ". Durch das von euch ausgefüllte Formular liefern wir euch ein individuelles Angebot.",
-  " bis zum großen Tag! Wir sind 24/7 erreichbar. Über WhatsApp, Telefon oder E-Mail.",
-];
+import { serviceBlocks } from "@/data/services";
 
 export default function ProcessSteps() {
   const [visibleBlocks, setVisibleBlocks] = useState<boolean[]>([false, false, false]);
@@ -189,7 +156,7 @@ export default function ProcessSteps() {
                 <p className="text-[#4a4a4a] font-light leading-[1.7]">
                   {block.text}
                   <span className="text-[#2DD4A8] font-semibold">{block.highlight}</span>
-                  {blockDescriptions[index]}
+                  {block.description}
                 </p>
               </div>
             </div>

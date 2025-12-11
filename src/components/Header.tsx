@@ -2,12 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
-const navItems = [
-  { href: "/#waswirbieten", label: "Unsere Leistungen", isAnchor: true },
-  { href: "/ueber-uns", label: "Über Uns", isAnchor: false },
-  { href: "/#faq", label: "FAQ", isAnchor: true },
-];
+import { navLinks, siteConfig } from "@/config/site";
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
@@ -72,7 +67,7 @@ export default function Header() {
             </div>
 
             <nav className="header-nav hidden md:flex items-center gap-8">
-              {navItems.map((item) => (
+              {navLinks.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -128,7 +123,7 @@ export default function Header() {
           style={{ backgroundColor: "#ffffff" }}
         >
           <div className="py-4 px-6">
-            {navItems.map((item) => (
+            {navLinks.map((item) => (
               <a
                 key={item.href}
                 href={item.href}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { siteConfig, footerLinks } from "@/config/site";
 
 export default function Footer() {
   return (
@@ -7,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <Link href="/" className="text-xl font-semibold text-gray-900">
-              musikfürfirmen.de
+              {siteConfig.name}
             </Link>
             <p className="mt-2 text-sm text-gray-600 font-light">
               Dein Partner für Firmenevents
@@ -21,18 +22,18 @@ export default function Footer() {
             <div className="space-y-2 text-sm text-gray-600 font-light">
               <p>
                 <a
-                  href="mailto:kontakt@musikfürfirmen.de"
+                  href={`mailto:${siteConfig.email}`}
                   className="hover:text-gray-900 transition-colors"
                 >
-                  kontakt@musikfürfirmen.de
+                  {siteConfig.email}
                 </a>
               </p>
               <p>
                 <a
-                  href="tel:+491741699553"
+                  href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
                   className="hover:text-gray-900 transition-colors"
                 >
-                  +49 174 1699553
+                  {siteConfig.phone}
                 </a>
               </p>
             </div>
@@ -41,37 +42,23 @@ export default function Footer() {
           <div>
             <h4 className="text-base font-semibold text-gray-900 mb-4">Info</h4>
             <div className="space-y-2 text-sm">
-              <p>
-                <Link
-                  href="/#wir"
-                  className="text-gray-600 hover:text-gray-900 transition-colors font-light"
-                >
-                  Über uns
-                </Link>
-              </p>
-              <p>
-                <Link
-                  href="/impressum"
-                  className="text-gray-600 hover:text-gray-900 transition-colors font-light"
-                >
-                  Impressum
-                </Link>
-              </p>
-              <p>
-                <Link
-                  href="/datenschutz"
-                  className="text-gray-600 hover:text-gray-900 transition-colors font-light"
-                >
-                  Datenschutz
-                </Link>
-              </p>
+              {footerLinks.info.map((link) => (
+                <p key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-600 hover:text-gray-900 transition-colors font-light"
+                  >
+                    {link.label}
+                  </Link>
+                </p>
+              ))}
             </div>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-200/50">
           <p className="text-sm text-gray-500 text-center font-light">
-            © {new Date().getFullYear()} musikfürfirmen.de. Alle Rechte
+            © {new Date().getFullYear()} {siteConfig.name}. Alle Rechte
             vorbehalten.
           </p>
         </div>
