@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
   // Image optimization
   images: {
     formats: ["image/avif", "image/webp"],
+    // Note: quality must be set per <Image> component in Next.js 16
+    // Use quality={90} prop on Image components for high-quality photos
   },
 
   // Security headers

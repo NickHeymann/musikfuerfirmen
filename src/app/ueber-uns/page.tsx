@@ -374,6 +374,7 @@ export default function UeberUnsPage() {
                   fill
                   className="object-cover object-top rounded-full scale-110"
                   sizes="192px"
+                  quality={90}
                 />
               </div>
               <h3 className="text-2xl font-semibold text-[#1a1a1a] mb-1">Jonas Glamann</h3>
@@ -438,6 +439,7 @@ export default function UeberUnsPage() {
                   fill
                   className="object-cover object-top rounded-full scale-110"
                   sizes="192px"
+                  quality={90}
                 />
               </div>
               <h3 className="text-2xl font-semibold text-[#1a1a1a] mb-1">Nick Heymann</h3>
