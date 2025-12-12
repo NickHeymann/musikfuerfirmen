@@ -111,36 +111,55 @@ export function useContactForm() {
       {} as Record<string, string>
     );
 
-    const emailBody = `
-Neue Anfrage von der Website
+    const guestLabels: Record<string, string> = {
+      "lt100": "Unter 100",
+      "100-300": "100-300",
+      "300-500": "300-500",
+      "gt500": "Über 500",
+    };
 
-Name: ${formData.name}
-Firma: ${formData.company || "-"}
-E-Mail: ${formData.email}
-Telefon: ${formData.phone}
-
+    const extendedMessage = `
 Event-Details:
-- Datum: ${formData.date}
 - Uhrzeit: ${formData.time || "Nicht angegeben"}
-- Stadt: ${formData.city}
-- Gäste: ${formData.guests}
 - Budget: ${formData.budget || "Nicht angegeben"}
-- Paket: ${packageLabels[formData.package] || formData.package}
 
-Nachricht:
-${formData.message || "Keine Nachricht"}
+${formData.message ? `Nachricht:\n${formData.message}` : ""}
     `.trim();
 
-    const mailtoLink = `mailto:info@musikfuerfirmen.de?subject=${encodeURIComponent(
-      `Neue Anfrage: ${formData.city} am ${formData.date}`
-    )}&body=${encodeURIComponent(emailBody)}`;
+    try {
+      const response = await fetch(
+        "https://n8n.91.99.177.238.nip.io/webhook/musikfuerfirmen-lead",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            company: formData.company || "",
+            phone: formData.phone,
+            eventType: packageLabels[formData.package] || formData.package,
+            eventDate: formData.date,
+            guestCount: guestLabels[formData.guests] || formData.guests,
+            budget: formData.budget || "",
+            message: extendedMessage,
+            leadSource: "Website Kontaktformular",
+          }),
+        }
+      );
 
-    window.location.href = mailtoLink;
-
-    setTimeout(() => {
-      setSubmitStatus("success");
+      if (response.ok) {
+        setSubmitStatus("success");
+      } else {
+        throw new Error("Server response was not ok");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitStatus("error");
+    } finally {
       setIsSubmitting(false);
-    }, 500);
+    }
   };
 
   const reset = () => {

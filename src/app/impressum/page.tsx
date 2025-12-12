@@ -28,10 +28,10 @@ export default function Impressum() {
               Angaben gemäß § 5 TMG
             </h2>
             <div className="bg-[#f9faf9] rounded-xl p-6 leading-relaxed">
-              <p className="font-medium text-[#1a1a1a]">Nick Heymann</p>
+              <p className="font-medium text-[#1a1a1a]">Jonas Glamann</p>
               <p>musikfürfirmen.de</p>
-              <p className="mt-2 text-sm text-[#666]">[Straße und Hausnummer]</p>
-              <p className="text-sm text-[#666]">[PLZ] Hamburg</p>
+              <p className="mt-2">Hellbrookstraße 42a</p>
+              <p>22305 Hamburg</p>
             </div>
           </section>
 
@@ -64,7 +64,7 @@ export default function Impressum() {
             <p className="leading-relaxed">
               Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:
             </p>
-            <p className="mt-2 text-sm text-[#666]">[USt-IdNr. hier eintragen]</p>
+            <p className="mt-2 font-medium">DE406490626</p>
           </section>
 
           {/* Verantwortlich */}
@@ -73,9 +73,11 @@ export default function Impressum() {
               Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
             </h2>
             <p className="leading-relaxed">
-              Nick Heymann
+              Jonas Glamann
               <br />
-              <span className="text-sm text-[#666]">[Adresse wie oben]</span>
+              Hellbrookstraße 42a
+              <br />
+              22305 Hamburg
             </p>
           </section>
 
